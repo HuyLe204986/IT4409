@@ -45,3 +45,26 @@ export const WrapperStyleTextSell = styled.span`
     line-height: 24px;
     color: rgb(120, 120, 120)
 `
+export const WrapperFavourite = styled.div`
+position: absolute;
+top: 0px;
+left: -4px;
+color: #ee4d2d;
+background-color: currentColor;
+font-size: 10px;
+font-weight: 500;
+line-height: 16px;
+padding-right: 4px;
+border-top-right-radius: 3px;
+border-bottom-right-radius: 3px;
+
+&::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    border-top: 3px solid currentColor;
+    border-left: 3px solid transparent;
+    filter: brightness(60%);
+}
+`
