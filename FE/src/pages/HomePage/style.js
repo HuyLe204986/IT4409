@@ -7,10 +7,11 @@ export const WrapperTypeProduct = styled.div`
     gap: 24px;
     justify-content: flex-start;
     height: 44px;
-    backgroundcolor: #333333;
+   
 `
 
 export const WrapperButtonMore = styled(ButtonComponent)`
+    margin:20px 0;
     &:hover {
         color: #fff;
         background: rgb(13, 92, 182);

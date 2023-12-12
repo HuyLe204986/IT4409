@@ -50,7 +50,7 @@ const HomePage = () => {
     // console.log("prev", isPlaceholderData, isLoading);
     return (
         <Loading isLoading={isLoading || loading}>
-            <div style={{ width: '100%', margin: '0 auto',backgroundColor: '#333333' }}>
+            <div style={{ width: '1270px', margin: '0 auto' }}>
                 <WrapperTypeProduct>
                     {typeProducts.map((item) => {
                         return <TypeProduct  name={item} key={item} />;
