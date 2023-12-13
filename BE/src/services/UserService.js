@@ -8,7 +8,11 @@ const userService = {
         try {
             const { email, password, confirmPassword } = newUser;
             const user = await User.findOne({ where: { email } });
-            if (user) return reject(new Error(`Email ${email} already exit`));
+            if (user) return resolve({
+                status: 'ERR',
+                message: 'Email is exit',
+                data
+            });
 
             const hash = bcrypt.hashSync(password, 10)
 
@@ -18,7 +22,7 @@ const userService = {
             })
             resolve({
                 status: 'OK',
-                message: 'SUCCESS',
+                message: 'CREATE SUCCESS ',
                 data
             })
         } catch (error) {
@@ -30,10 +34,18 @@ const userService = {
         const { email, password } = userLogin;
         try {
             const user = await User.findOne({ where: { email } });
-            if (user === null) return reject(new Error(`Email ${email} is not exit`));
-            const comparePassword = bcrypt.compareSync(password, user.password);
+            if (user === null) return resolve({
+                status: 'ERR',
+                message: 'Email is not exit',
+                data
+            });
 
-            if (!comparePassword) return reject(new Error(`Password is not correct`));
+            if (!comparePassword) return resolve({
+                status: 'ERR',
+                message: 'Password is not correct',
+                data
+            });
+
 
             const access_token = await generalAccessToken({
                 id: user.id,
@@ -62,7 +74,10 @@ const userService = {
     updateUser: (id, data) => new Promise(async (resolve, reject) => {
         try {
             const user = await User.findOne({ where: { id: id } });
-            if (user === null) return reject(new Error(`User is not exit`));
+            if (user === null) return resolve({
+                status: 'ERR',
+                message: 'User is not exit'
+            })
 
             const checkEmail = await User.findOne({ where: { email: data.email } });
 
@@ -96,7 +111,10 @@ const userService = {
     deleteUser: (id) => new Promise(async (resolve, reject) => {
         try {
             const user = await User.findOne({ where: { id: id } });
-            if (user === null) return reject(new Error(`User is not exit`));
+            if (user === null) return resolve({
+                status: 'ERR',
+                message: 'Email is already use'
+            })
 
             const deletedUser = await User.destroy({ where: { id: id } });
 

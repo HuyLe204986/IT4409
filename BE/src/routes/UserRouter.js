@@ -15,7 +15,4 @@ router.post('/delete-many', authAdminMiddleWare, userController.deleteMany)
 
 
 
-
-
-
 module.exports = router
