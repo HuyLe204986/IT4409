@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { addOrderRedux } from '../../utils'
 
 const initialState = {
   orderItems: [],
@@ -25,6 +24,7 @@ export const orderSlide = createSlice({
       console.log('action', action);
       const {orderItem} = action.payload
       const itemOrder = state?.orderItems?.find((item) => item?.product === orderItem.product)
+      console.log('order',itemOrder);
       if(itemOrder){
         itemOrder.amount += orderItem?.amount
       }else {

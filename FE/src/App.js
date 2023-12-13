@@ -17,11 +17,11 @@ export function App() {
     const user = useSelector((state) => state.user)
     useEffect(() => {
         setIsLoading(true);
-        const  {storageData, decoded} = handleDecoded();
+        const  { storageData, decoded } = handleDecoded();
         if(decoded?.id) {
             handleGetDetailsUser(decoded?.id, storageData)
         }
-        console.log('storage data: ' +storageData);
+        // console.log('storage data: ' +storageData);
         setIsLoading(false);
     }, []);
 
@@ -54,7 +54,7 @@ export function App() {
     const handleGetDetailsUser = async (id, token) => {
         const res = await userService.getDetailsUser(id, token);
         dispatch(updateUser({...res?.data, access_token: token}))
-        console.log('res', res);
+        // console.log('res', res);
     }
 
     // const fetchApi = async () => {
