@@ -11,6 +11,7 @@ import { useDebounce } from '../../hooks/useDebounce'
 import * as productService from '../../services/ProductService';
 import { useQuery } from '@tanstack/react-query'
 import Loading from '../../components/LoadingComponent/Loading'
+import Footer from '../../components/FooterComponent/FooterComponent'
 const HomePage = () => {
   const searchProduct = useSelector((state) => state?.product?.search)
     const searchDebounce = useDebounce(searchProduct, 500)
@@ -99,6 +100,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </Loading>
     );
 }
