@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const { Sequelize } = require('sequelize');
 const routes = require('./routes');
 const cors = require('cors');
@@ -19,35 +19,35 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 routes(app);
 
-// const sequelize = new Sequelize('it4409','root', null, {
-//     host: 'localhost',
-//     dialect: 'mysql',
-//     logging: false
-// })
+const sequelize = new Sequelize('it4409', 'root', null, {
+    host: 'localhost',
+    dialect: 'mysql',
+    logging: false
+})
 
-// async function connectToDatabase() {
-//     try {
-//         await sequelize.authenticate();
-//         console.log('Connect Db success');
-//     } catch (error) {
-//         console.error('Connect Db failed', error);
-//     }
-// }
+async function connectToDatabase() {
+    try {
+        await sequelize.authenticate();
+        console.log('Connect Db success');
+    } catch (error) {
+        console.error('Connect Db failed', error);
+    }
+}
 
-// // Gọi hàm connectToDatabase
-// connectToDatabase();
+// Gọi hàm connectToDatabase
+connectToDatabase();
 
-mongoose.connect(`${process.env.MONGO_DB}`)
-    .then(() => {
-        console.log('Connect Db monggoo success');
-    })
-    .catch((e) => {
-        console.log('Connect Db failed', e);
+// mongoose.connect(`${process.env.MONGO_DB}`)
+//     .then(() => {
+//         console.log('Connect Db monggoo success');
+//     })
+//     .catch((e) => {
+//         console.log('Connect Db failed', e);
 
-    })
-    .catch(err => {
-        console.log(err);
-    });
+//     })
+//     .catch(err => {
+//         console.log(err);
+//     });
 
 
 app.listen(port, () => {

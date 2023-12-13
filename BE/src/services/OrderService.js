@@ -1,7 +1,5 @@
-const Order = require("../models/Order")
-const OrderItem = require("../models/OrderItem")
-const Product = require("../models/Product")
-
+const sequelize = require('sequelize');
+const { Product, Order, OrderItem } = require("../models/index")
 
 const orderService = {
     createOrder: (newOrder) => new Promise(async (resolve, reject) => {
@@ -11,12 +9,18 @@ const orderService = {
             const promises = orderItems.map(async (order) => {
                 const productData = await Product.findOne({
                     where: { id: order.productId, countInStock: { [sequelize.Op.gte]: order.amount }, }
-                });
+                })
+
+
+                // const productData = await Product.find({
+                //     where: { id: order.productId, countInStock: { [sequelize.Op.gte]: order.amount }, }
+                // });
                 if (productData) {
+
                     await Product.update(
                         {
-                            countInStock: sequelize.literal(`countInStock - ${Product.amount}`),
-                            selled: sequelize.literal(`selled + ${Product.amount}`),
+                            countInStock: sequelize.literal(`countInStock - ${order.amount}`),
+                            selled: sequelize.literal(`selled + ${order.amount}`),
                         },
                         {
                             where: { id: order.productId },
@@ -25,14 +29,14 @@ const orderService = {
 
                     return {
                         status: 'OK',
-                        message: 'CREATE USER SUCCESS',
+                        message: 'CREATE ORDER SUCCESS',
                     };
                 } else {
                     const product = await Product.findOne({
                         where: { id: order.productId },
                     });
                     return {
-                        status: 'OK',
+                        status: 'ERR',
                         message: 'ERR',
                         name: product.name
                     }
@@ -58,7 +62,7 @@ const orderService = {
                     itemsPrice,
                     shippingPrice,
                     totalPrice,
-                    user: user,
+                    userId: user,
                     isPaid, paidAt
                 })
 
@@ -66,6 +70,7 @@ const orderService = {
                     await OrderItem.create({
                         name: order.name,
                         amount: order.amount,
+                        image: 'a',
                         price: order.price,
                         discount: order.discount,
                         orderId: createdOrder.id,
@@ -74,17 +79,17 @@ const orderService = {
                 })
                 resolve({
                     status: 'OK',
-                    message: 'success'
+                    message: 'create order success'
                 })
             }
         } catch (e) {
-            reject(e)
+            reject(e.message)
         }
     }),
 
     getAllOrderDetails: (id) => new Promise(async (resolve, reject) => {
         try {
-            let orders = await Order.find({
+            let orders = await Order.findAll({
                 where: { userId: id },
                 order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
             });
@@ -97,104 +102,24 @@ const orderService = {
             }
 
             orders.forEach(async (order, index) => {
-                const orderItems = await OrderItem.find({
+                const orderItems = await OrderItem.findAll({
                     where: { orderId: order.id },
                     order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
                 });
-                orders[index].orderItems = orderItems;
+                orders[index].dataValues.orderItems = orderItems;
+
+                if (index + 1 == orders.length) {
+                    resolve({
+                        status: 'OK',
+                        message: 'SUCESSS',
+                        data: orders
+                    })
+                }
+
             })
-            resolve({
-                status: 'OK',
-                message: 'SUCESSS',
-                data: orders
-            })
-            // {
-            //     "status": "OK",
-            //     "message": "SUCESSS",
-            //     "data": [
-            //         {
-            //             "shippingAddress": {
-            //                 "fullName": "a",
-            //                 "address": "a",
-            //                 "city": "a",
-            //                 "phone": 1234
-            //             },
-            //             "_id": "6576e491498a5df684c052c9",
-            //             "orderItems": [
-            //                 {
-            //                     "name": "a",
-            //                     "amount": 1,
-            //                     "image": "a",
-            //                     "price": 1,
-            //                     "discount": 1,
-            //                     "product": "6561c96227758445e5ae48fb",
-            //                     "_id": "6576e491498a5df684c052ca"
-            //                 },
-            //                 {
-            //                     "name": "b",
-            //                     "amount": 1,
-            //                     "image": "a",
-            //                     "price": 1,
-            //                     "discount": 1,
-            //                     "product": "6576dabf8a5203bdce9c1d62",
-            //                     "_id": "6576e491498a5df684c052cb"
-            //                 }
-            //             ],
-            //             "paymentMethod": "a",
-            //             "itemsPrice": 2,
-            //             "shippingPrice": 2,
-            //             "totalPrice": 4,
-            //             "user": "6576e02d58c40276301e9501",
-            //             "isPaid": false,
-            //             "isDelivered": false,
-            //             "createdAt": "2023-12-11T10:29:37.814Z",
-            //             "updatedAt": "2023-12-11T10:29:37.814Z",
-            //             "__v": 0
-            //         },
-            //         {
-            //             "shippingAddress": {
-            //                 "fullName": "a",
-            //                 "address": "a",
-            //                 "city": "a",
-            //                 "phone": 1234
-            //             },
-            //             "_id": "6576e46b498a5df684c052c3",
-            //             "orderItems": [
-            //                 {
-            //                     "name": "a",
-            //                     "amount": 1,
-            //                     "image": "a",
-            //                     "price": 1,
-            //                     "discount": 1,
-            //                     "product": "6561c96227758445e5ae48fb",
-            //                     "_id": "6576e46b498a5df684c052c4"
-            //                 },
-            //                 {
-            //                     "name": "b",
-            //                     "amount": 1,
-            //                     "image": "a",
-            //                     "price": 1,
-            //                     "discount": 1,
-            //                     "product": "6576dabf8a5203bdce9c1d62",
-            //                     "_id": "6576e46b498a5df684c052c5"
-            //                 }
-            //             ],
-            //             "paymentMethod": "a",
-            //             "itemsPrice": 2,
-            //             "shippingPrice": 2,
-            //             "totalPrice": 4,
-            //             "user": "6576e02d58c40276301e9501",
-            //             "isPaid": false,
-            //             "isDelivered": false,
-            //             "createdAt": "2023-12-11T10:28:59.916Z",
-            //             "updatedAt": "2023-12-11T10:28:59.916Z",
-            //             "__v": 0
-            //         }
-            //     ]
-            // }
         } catch (e) {
             // console.log('e', e)
-            reject(e)
+            reject(e.message)
         }
     }),
 
@@ -207,6 +132,12 @@ const orderService = {
                     message: 'The order is not defined'
                 })
             }
+            const orderItems = await OrderItem.findAll({
+                where: { orderId: order.id },
+                order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
+            });
+
+            order.dataValues.orderItems = orderItems;
 
             resolve({
                 status: 'OK',
@@ -272,14 +203,36 @@ const orderService = {
 
     getAllOrder: () => new Promise(async (resolve, reject) => {
         try {
-            const allOrder = await Order.find().sort({ createdAt: -1, updatedAt: -1 })
-            resolve({
-                status: 'OK',
-                message: 'Success',
-                data: allOrder
+            let orders = await Order.findAll({
+                order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
+            });
+
+            if (orders === null) {
+                resolve({
+                    status: 'OK',
+                    message: 'SUCESSS',
+                    data: orders
+                })
+            }
+
+            orders.forEach(async (order, index) => {
+                const orderItems = await OrderItem.findAll({
+                    where: { orderId: order.id },
+                    order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
+                });
+                orders[index].dataValues.orderItems = orderItems;
+
+                if (index + 1 == orders.length) {
+                    resolve({
+                        status: 'OK',
+                        message: 'SUCESSS',
+                        data: orders
+                    })
+                }
+
             })
         } catch (e) {
-            reject(e)
+            reject(e.message)
         }
     })
 }
