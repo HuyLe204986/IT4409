@@ -73,6 +73,7 @@ const userService = {
 
     updateUser: (id, data) => new Promise(async (resolve, reject) => {
         try {
+            console.log('cap nhat ', id);
             const user = await User.findOne({ where: { id: id } });
             if(!data.email) {
                 data.email = user.email;
@@ -95,15 +96,15 @@ const userService = {
                 const password = data.password;
                 data.password = bcrypt.hashSync(password, 10)
             }
-
+            console.log('data nhan duoc', data);
             await User.update(data, { where: { id: id } });
 
             const updatedUser = await User.findOne({ where: { id } });
-
+            console.log('udpate thanh cong', updatedUser);
             resolve({
                 status: 'OK',
                 message: 'SUCCESS',
-                updatedUser
+                data: updatedUser
             })
 
         } catch (error) {

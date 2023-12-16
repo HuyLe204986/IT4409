@@ -1,23 +1,18 @@
-import { Button, Form, Space } from 'antd'
+import { Button, Space } from 'antd'
 import React from 'react'
-import { WrapperHeader, WrapperUploadFile } from './style'
+import { WrapperHeader } from './style'
 import TableComponent from '../TableComponent/TableComponent'
 import InputComponent from '../InputComponent/InputComponent'
-import DrawerComponent from '../DrawerComponent/DrawerComponent'
-import Loading from '../LoadingComponent/Loading'
-import ModalComponent from '../ModalComponent/ModalComponent'
-import { convertPrice, getBase64 } from '../../utils'
-import { useEffect } from 'react'
-import * as message from '../Message/Message'
+import { convertPrice } from '../../utils'
 
 import * as OrderService from '../../services/OrderService'
 import { useQuery } from '@tanstack/react-query'
-import { DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { orderContant } from '../../contant'
 // import PieChartComponent from './PieChart'
 
-const OrderAdmin = () => {
+const AdminOrder = () => {
   const user = useSelector((state) => state?.user)
 
 
@@ -28,7 +23,7 @@ const OrderAdmin = () => {
 
 
   const queryOrder = useQuery({ queryKey: ['orders'], queryFn: getAllOrder })
-  const { isLoading: isLoadingOrders, data: orders } = queryOrder
+  const { isPending: isLoadingOrders, data: orders } = queryOrder
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -149,8 +144,8 @@ const OrderAdmin = () => {
   ];
 
   const dataTable = orders?.data?.length && orders?.data?.map((order) => {
-    console.log('usewr', order)
-    return { ...order, key: order._id, userName: order?.fullName, phone: order?.phone, address: order?.address, paymentMethod: orderContant.payment[order?.paymentMethod],isPaid: order?.isPaid ? 'TRUE' :'FALSE',isDelivered: order?.isDelivered ? 'TRUE' : 'FALSE', totalPrice: convertPrice(order?.totalPrice)}
+    console.log('user', order)
+    return { ...order, key: order._id, userName: order?.shippingAddress?.fullName, phone: order?.shippingAddress?.phone, address: order?.shippingAddress?.address, paymentMethod: orderContant.payment[order?.paymentMethod],isPaid: order?.isPaid ? 'TRUE' :'FALSE',isDelivered: order?.isDelivered ? 'TRUE' : 'FALSE', totalPrice: convertPrice(order?.totalPrice)}
   })
 
   return (
@@ -166,4 +161,4 @@ const OrderAdmin = () => {
   )
 }
 
-export default OrderAdmin
+export default AdminOrder
