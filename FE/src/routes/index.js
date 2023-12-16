@@ -9,7 +9,7 @@ import ProfilePage from "../pages/Profile/ProfilePage";
 import SignInPage from "../pages/SignInPage/SignInPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
-import MyOrderPage from "../pages/MyOrder/MyOrder";
+import MyOrder from "../pages/MyOrder/MyOrder";
 import DetailsOrderPage from "../pages/DetailsOrderPage/DetailsOrderPage";
 import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
 
@@ -66,7 +66,7 @@ export const routes = [
     },
     {
         path: '/my-order',
-        page: MyOrderPage,
+        page: MyOrder,
         isShowHeader: true
     },
     {

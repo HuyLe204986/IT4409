@@ -67,7 +67,7 @@ const HomePage = () => {
                         {products?.data?.map((product) => {
                             return (
                                 <CardComponent 
-                                    key={product._id}
+                                    key={product.id}
                                     conutInStock = {product.conutInStock}
                                     description={product.description}
                                     image={product.image}
@@ -77,7 +77,7 @@ const HomePage = () => {
                                     type={product.type}
                                     selled={product.selled}
                                     discount={product.discount}
-                                    id={product._id}
+                                    id={product.id}
                                 />
                             )
                         })}
