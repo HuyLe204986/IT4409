@@ -24,7 +24,7 @@ const AdminProduct = () => {
     // const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
     const user = useSelector((state) => state?.user);
-  console.log('user', user);
+    console.log('user', user);
     const inittial = () => ({
         name: '',
         price: '',
@@ -424,6 +424,7 @@ const AdminProduct = () => {
     }, [isSuccessUpdated]);
 
     const onFinish = () => {
+        console.log('finisd');
         const params = {
             name: stateProduct.name,
             price: stateProduct.price,

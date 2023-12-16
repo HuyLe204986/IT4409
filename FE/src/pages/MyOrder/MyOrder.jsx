@@ -17,6 +17,7 @@ const MyOrder = () => {
     const navigate = useNavigate()
     const fetchMyOrder = async () => {
         const res = await orderService.getOrderByUserId(state?.id, state?.token)
+        console.log('res', res);
         return res.data;
     }
     const queryOrder = useQuery({ 
@@ -25,6 +26,7 @@ const MyOrder = () => {
         enabled: !!state?.id && !!state?.token 
     })
     const { isPending: isLoading, data } = queryOrder
+    console.log('query', queryOrder);
     const renderProduct =  (data) => {
         return data?.map((order) => {
             return <WrapperHeaderItem key={order?._id}> 
@@ -66,9 +68,9 @@ const MyOrder = () => {
           return res
         }
     )
-
     const handleCanceOrder = (order) => {
-        mutation.mutate({id : order._id, token:state?.token, orderItems: order?.orderItems, userId: user.id }, {
+        console.log('o', order);
+        mutation.mutate({id : order.id, token:state?.token, orderItems: order?.orderItems, userId: user.id }, {
             onSuccess: () => {
                 queryOrder.refetch()
             },
@@ -76,7 +78,7 @@ const MyOrder = () => {
     }
 
     const { isPending: isLoadingCancel, isSuccess: isSuccessCancel, isError: isErrorCancle, data: dataCancel } = mutation
-
+    console.log('is loading', isLoading, isLoadingCancel);
     useEffect(() => {
         if (isSuccessCancel && dataCancel?.status === 'OK') {
           message.success()
@@ -92,7 +94,7 @@ const MyOrder = () => {
                 <div style={{height: '100%', width: '1270px', margin: '0 auto'}}>
                     <h4>Đơn hàng của tôi</h4>
                     <WrapperListOrder>
-                        {data && data?.map((order) => {
+                        {data?.map((order) => {
                         return (
                             <WrapperItemOrder key={order?._id}>
                             <WrapperStatus>
@@ -128,7 +130,7 @@ const MyOrder = () => {
                                 >
                                 </ButtonComponent>
                                 <ButtonComponent
-                                    onClick={() => handleDetailsOrder(order?._id)}
+                                    onClick={() => handleDetailsOrder(order?.id)}
                                     size={40}
                                     styleButton={{
                                         height: '36px',
