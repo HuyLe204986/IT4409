@@ -11,10 +11,8 @@ const orderController = {
             }
             const response = await OrderService.createOrder(req.body)
             return res.status(200).json(response)
-        } catch (e) {
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     },
     getAllOrderDetails: async (req, res) => {
@@ -28,11 +26,8 @@ const orderController = {
             }
             const response = await OrderService.getAllOrderDetails(userId)
             return res.status(200).json(response)
-        } catch (e) {
-            // console.log(e)
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     },
     getDetailsOrder: async (req, res) => {
@@ -46,11 +41,8 @@ const orderController = {
             }
             const response = await OrderService.getOrderDetails(orderId)
             return res.status(200).json(response)
-        } catch (e) {
-            // console.log(e)
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     },
     cancelOrderDetails: async (req, res) => {
@@ -65,22 +57,16 @@ const orderController = {
             }
             const response = await OrderService.cancelOrderDetails(orderId, data)
             return res.status(200).json(response)
-        } catch (e) {
-            // console.log(e)
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     },
     getAllOrder: async (req, res) => {
         try {
             const data = await OrderService.getAllOrder()
             return res.status(200).json(data)
-        } catch (e) {
-            // console.log(e)
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     }
 
