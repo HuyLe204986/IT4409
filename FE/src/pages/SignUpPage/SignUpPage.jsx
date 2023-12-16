@@ -34,7 +34,8 @@ const SignUpPage = () => {
              message.error();
         }else if(isSuccess){
             message.success();
-            handleNavigateSignIn();        }
+            handleNavigateSignIn();        
+        }
     }, [isSuccess, isError])
     //handle input
     const handleOnChangeEmail = (value) => {

@@ -1,3 +1,4 @@
+import { Checkbox } from "antd";
 import styled  from "styled-components";
 
 export const WrapperStyleHeader = styled.div`
@@ -82,4 +83,14 @@ export const WrapperTotal = styled.div`
     background: #fff ;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
+`
+
+export const CustomCheckbox = styled(Checkbox)`
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #9255FD;
+    border-color: #9255FD;
+  }
+  .ant-checkbox:hover .ant-checkbox-inner {
+    border-color: #9255FD;
+  }
 `

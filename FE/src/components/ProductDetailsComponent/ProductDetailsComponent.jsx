@@ -52,6 +52,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
             }
         }
     }
+    console.log('user', user);
     const handleAddOrderProduct = () => {
         if(!user?.id) {
             //dùng location pathname để khi đăng nhập thành công thì vẫn ở trang đặt hàng thay vì homepage

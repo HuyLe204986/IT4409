@@ -4,6 +4,7 @@ dotenv.config();
 
 const authAdminMiddleWare = (req, res, next) => {
     const token = req.headers.token?.split(' ')[1]
+    console.log('h',req.headers);
     console.log('huy', req.headers.token);
     jwt.verify(token, process.env.ACCESS_TOKEN, function (err, user){
         if(err){
