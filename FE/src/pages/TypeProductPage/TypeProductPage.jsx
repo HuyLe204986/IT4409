@@ -20,11 +20,9 @@ const TypeProductPage = () => {
         total: 1,
     });
     const { state } = useLocation();
-    // console.log('location: ' ,location);
     const fetchProductType = async (type, page, limit) => {
         setLoading(true);
         const res = await productService.getProductType(type, page, limit);
-        // console.log('res trong type: ', res);
         if (res?.status == 'OK') {
             setLoading(false);
             setProducts(res?.data);
@@ -41,7 +39,6 @@ const TypeProductPage = () => {
     const onChange = (current, pageSize) => {
         setPanigate({ ...panigate, page: current - 1, limit: pageSize });
     };
-    // console.log('pro', products);
     return (
         <Loading isLoading={loading}>
             <div style={{ width: '100%', background: '#efefef', height: 'calc(100vh - 64px)' }}>
@@ -64,7 +61,7 @@ const TypeProductPage = () => {
                                 }).map((product) => {
                                     return (
                                         <CardComponent
-                                            key={product._id}
+                                            key={product.id}
                                             countInStock={product.countInStock}
                                             description={product.description}
                                             image={product.image}
@@ -74,7 +71,7 @@ const TypeProductPage = () => {
                                             type={product.type}
                                             selled={product.selled}
                                             discount={product.discount}
-                                            id={product._id}
+                                            id={product.id}
                                         />
                                     );
                                 })}

@@ -1,10 +1,5 @@
 import { axiosJWT } from "./UserService"
 
-// export const createProduct = async (data) => {
-//   const res = await axios.post(`${process.env.REACT_APP_API_URL}/product/create`, data)
-//   return res.data
-// // }
-// http://localhost:3001/api/order/get-order-details/639724669c6dda4fa11edcde
 export const createOrder = async (data,access_token) => {
   const res = await axiosJWT.post(`${process.env.REACT_APP_API_URL}/order/create/${data.user}`, data, {
       headers: {
@@ -34,7 +29,8 @@ export const getDetailsOrder = async (id,access_token) => {
 
 export const cancelOrder = async (id, access_token, orderItems, userId ) => {
   const data = {orderItems, orderId: id}
-  console.log('token', userId);
+  // console.log('data cancel ', data);
+  // console.log('token', userId);
     const res = await axiosJWT.delete(`${process.env.REACT_APP_API_URL}/order/cancel-order/${userId}`, {data}, {
       headers: {
           token: `Bearer ${access_token}`,

@@ -17,7 +17,6 @@ const MyOrder = () => {
     const navigate = useNavigate()
     const fetchMyOrder = async () => {
         const res = await orderService.getOrderByUserId(state?.id, state?.token)
-        console.log('res', res);
         return res.data;
     }
     const queryOrder = useQuery({ 
@@ -26,10 +25,13 @@ const MyOrder = () => {
         enabled: !!state?.id && !!state?.token 
     })
     const { isPending: isLoading, data } = queryOrder
-    console.log('query', queryOrder);
+    console.log('order', data);
+    useEffect(() => {
+        queryOrder.refetch();
+    }, [data.length]);
     const renderProduct =  (data) => {
         return data?.map((order) => {
-            return <WrapperHeaderItem key={order?._id}> 
+            return <WrapperHeaderItem key={order?.id}> 
                     <img src={order?.image} 
                         alt='product-img'
                       style={{
@@ -68,8 +70,8 @@ const MyOrder = () => {
           return res
         }
     )
+
     const handleCanceOrder = (order) => {
-        console.log('o', order);
         mutation.mutate({id : order.id, token:state?.token, orderItems: order?.orderItems, userId: user.id }, {
             onSuccess: () => {
                 queryOrder.refetch()
@@ -78,7 +80,6 @@ const MyOrder = () => {
     }
 
     const { isPending: isLoadingCancel, isSuccess: isSuccessCancel, isError: isErrorCancle, data: dataCancel } = mutation
-    console.log('is loading', isLoading, isLoadingCancel);
     useEffect(() => {
         if (isSuccessCancel && dataCancel?.status === 'OK') {
           message.success()
@@ -96,7 +97,7 @@ const MyOrder = () => {
                     <WrapperListOrder>
                         {data?.map((order) => {
                         return (
-                            <WrapperItemOrder key={order?._id}>
+                            <WrapperItemOrder key={order?.id}>
                             <WrapperStatus>
                                 <span style={{fontSize: '14px', fontWeight: 'bold'}}>Trạng thái</span>
                                 <div>

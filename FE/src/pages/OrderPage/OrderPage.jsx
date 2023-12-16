@@ -171,6 +171,8 @@ const OrderPage = () => {
         return res;
     });
     const { isPending: isLoading, data } = mutationUpdate;
+    console.log('mutation update', mutationUpdate);
+    console.log('dataa update', data);
     const handleUpdateInforUser = () => {
         const { name, address, city, phone } = stateUserDetails;
         if (name && address && city && phone) {
@@ -178,6 +180,7 @@ const OrderPage = () => {
                 { id: user?.id, token: user?.access_token, ...stateUserDetails },
                 {
                     onSuccess: () => {
+                        console.log('thanh cong cap nhat');
                         dispatch(updateUser({ name, address, city, phone }));
                         setIsOpenModalUpdateInfo(false);
                     },
@@ -421,6 +424,7 @@ const OrderPage = () => {
                 open={isOpenModalUpdateInfo}
                 onCancel={handleCancleUpdate}
                 onOk={handleUpdateInforUser}
+                // onOk = {() => {console.log('click ok')}}
             >
                 <Loading isLoading={isLoading}>
                     <Form
