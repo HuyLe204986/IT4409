@@ -47,6 +47,7 @@ const orderController = {
     },
     cancelOrderDetails: async (req, res) => {
         try {
+            console.log('body', req.body);
             const data = req.body.orderItems
             const orderId = req.body.orderId
             if (!orderId) {

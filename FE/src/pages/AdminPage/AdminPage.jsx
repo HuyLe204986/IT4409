@@ -4,12 +4,14 @@ import { getItem } from '../../utils';
 import { UserOutlined, AppstoreOutlined } from '@ant-design/icons'
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 import AdminUser from '../../components/AdminUser/AdminUser';
+import AdminOrder from '../../components/AdminOrder/AdminOrder';
 import AdminProduct from '../../components/AdminProduct/AdminProduct';
 
 const AdminPage = () => {
   const items = [
     getItem('Người dùng', 'user', <UserOutlined />),
-    getItem('Sản phẩm', 'product', <AppstoreOutlined />)
+    getItem('Sản phẩm', 'product', <AppstoreOutlined />),
+    getItem('Đơn hàng', 'order', <AppstoreOutlined />)
   ];
 
   const [keySelected, setKeySelected] = useState('')
@@ -23,6 +25,10 @@ const AdminPage = () => {
       case 'product':
         return (
           <AdminProduct />
+        )
+      case 'order':
+        return (
+          <AdminOrder />
         )
       default:
         return <></>

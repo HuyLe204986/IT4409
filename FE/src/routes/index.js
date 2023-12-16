@@ -60,7 +60,7 @@ export const routes = [
         isShowHeader: true
     },
     {
-        path: '/orderSuccess',
+        path: '/order-success',
         page: OrderSuccess,
         isShowHeader: true
     },

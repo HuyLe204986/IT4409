@@ -5,10 +5,9 @@ const orderService = {
     createOrder: (newOrder) => new Promise(async (resolve, reject) => {
         const { orderItems, paymentMethod, itemsPrice, shippingPrice, totalPrice, fullName, address, city, phone, user, isPaid, paidAt, email } = newOrder
         try {
-
             const promises = orderItems.map(async (order) => {
                 const productData = await Product.findOne({
-                    where: { id: order.productId, countInStock: { [sequelize.Op.gte]: order.amount }, }
+                    where: { id: order.product, countInStock: { [sequelize.Op.gte]: order.amount }, }
                 })
 
 
@@ -16,14 +15,13 @@ const orderService = {
                 //     where: { id: order.productId, countInStock: { [sequelize.Op.gte]: order.amount }, }
                 // });
                 if (productData) {
-
                     await Product.update(
                         {
                             countInStock: sequelize.literal(`countInStock - ${order.amount}`),
                             selled: sequelize.literal(`selled + ${order.amount}`),
                         },
                         {
-                            where: { id: order.productId },
+                            where: { id: order.product },
                         }
                     );
 
@@ -33,7 +31,7 @@ const orderService = {
                     };
                 } else {
                     const product = await Product.findOne({
-                        where: { id: order.productId },
+                        where: { id: order.product },
                     });
                     return {
                         status: 'ERR',
@@ -74,21 +72,24 @@ const orderService = {
                         price: order.price,
                         discount: order.discount,
                         orderId: createdOrder.id,
-                        productId: order.productId,
+                        productId: order.product,
                     })
                 })
+                console.log('OK');
                 resolve({
                     status: 'OK',
                     message: 'create order success'
                 })
             }
         } catch (e) {
+            console.log('co loi xay ra');
             reject(e.message)
         }
     }),
 
     getAllOrderDetails: (id) => new Promise(async (resolve, reject) => {
         try {
+            console.log('userid', id);
             let orders = await Order.findAll({
                 where: { userId: id },
                 order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
@@ -151,50 +152,32 @@ const orderService = {
     }),
     cancelOrderDetails: (id, data) => new Promise(async (resolve, reject) => {
         try {
-            let order = []
-            const promises = data.map(async (order) => {
-                const productData = await Product.findOneAndUpdate(
-                    {
-                        _id: order.product,
-                        selled: { $gte: order.amount }
-                    },
-                    {
-                        $inc: {
-                            countInStock: +order.amount,
-                            selled: -order.amount
-                        }
-                    },
-                    { new: true }
-                )
-                if (productData) {
-                    order = await Order.findByIdAndDelete(id)
-                    if (order === null) {
-                        resolve({
-                            status: 'ERR',
-                            message: 'The order is not defined'
-                        })
-                    }
-                } else {
-                    return {
-                        status: 'OK',
-                        message: 'ERR',
-                        id: order.product
-                    }
-                }
-            })
-            const results = await Promise.all(promises)
-            const newData = results && results[0] && results[0].id
 
-            if (newData) {
-                resolve({
-                    status: 'ERR',
-                    message: `San pham voi id: ${newData} khong ton tai`
+            const promises = data.map(async (order) => {
+                const productData = await Product.findOne({
+                    where: { id: order.productId }
                 })
-            }
+                if (productData) {
+                    await Product.update(
+                        {
+                            countInStock: sequelize.literal(`countInStock + ${order.amount}`),
+                            selled: sequelize.literal(`selled - ${order.amount}`),
+                        },
+                        {
+                            where: { id: order.productId },
+                        }
+                    );
+                }
+                console.log('id', order.id);
+                await OrderItem.destroy({ where: { id: order.id } })
+
+            })
+            await Order.destroy({ where: { id: id } })
+
+
             resolve({
                 status: 'OK',
                 message: 'success',
-                data: order
             })
         } catch (e) {
             reject(e)

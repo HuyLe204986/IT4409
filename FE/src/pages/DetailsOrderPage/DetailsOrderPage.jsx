@@ -21,9 +21,7 @@ const DetailsOrderPage = () => {
     return res.data
   }
 
-  const queryOrder = useQuery({ queryKey: ['orders-details'], queryFn: fetchDetailsOrder }, {
-    enabled: id
-  })
+  const queryOrder = useQuery({ queryKey: ['orders-details'], queryFn: fetchDetailsOrder, enabled: !!id })
   const { isLoading, data } = queryOrder
 
   const priceMemo = useMemo(() => {
@@ -32,7 +30,7 @@ const DetailsOrderPage = () => {
     },0)
     return result
   },[data])
-
+  console.log('daat', data);
   return (
    <Loading isLoading={isLoading}>
      <div style={{width: '100%', height: '100vh', background: '#f5f5fa'}}>
@@ -42,9 +40,9 @@ const DetailsOrderPage = () => {
           <WrapperInfoUser>
             <WrapperLabel>Địa chỉ người nhận</WrapperLabel>
             <WrapperContentInfo>
-              <div className='name-info'>{data?.shippingAddress?.fullName}</div>
-              <div className='address-info'><span>Địa chỉ: </span> {`${data?.shippingAddress?.address} ${data?.shippingAddress?.city}`}</div>
-              <div className='phone-info'><span>Điện thoại: </span> {data?.shippingAddress?.phone}</div>
+              <div className='name-info'>{data?.fullName}</div>
+              <div className='address-info'><span>Địa chỉ: </span> {`${data?.address}`}</div>
+              <div className='phone-info'><span>Điện thoại: </span> {data?.phone}</div>
             </WrapperContentInfo>
           </WrapperInfoUser>
           <WrapperInfoUser>
