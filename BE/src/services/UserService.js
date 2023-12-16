@@ -74,6 +74,9 @@ const userService = {
     updateUser: (id, data) => new Promise(async (resolve, reject) => {
         try {
             const user = await User.findOne({ where: { id: id } });
+            if(!data.email) {
+                data.email = user.email;
+            }
             if (user === null) return resolve({
                 status: 'ERR',
                 message: 'User is not exit'
