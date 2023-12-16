@@ -12,6 +12,7 @@ import { useMutationHooks } from '../../hooks/useMutationHook';
 import Loading from '../../components/LoadingComponent/Loading';
 import { useDispatch } from 'react-redux'
 import { updateUser } from '../../redux/slides/userSlide';
+import * as message from '../../components/Message/Message'
 const SignInPage = () => {
     const navigate = useNavigate();
     const [isShowPassword, setIsShowPassword] = useState(false);
@@ -34,20 +35,22 @@ const SignInPage = () => {
     const {data, isPending, isSuccess} = mutation
 
     useEffect(() => {
-        if(isSuccess) {
-            if(location?.state) {
-                navigate(location?.state)
-            }else {
-                navigate('/')
+        if(data?.status === 'ERR') {           
+            message.error();
+       }else if(isSuccess){
+        if(location?.state) {
+            navigate(location?.state)
+        }else {
+            navigate('/')
+        }
+        localStorage.setItem('access_token', JSON.stringify(data?.access_token))
+        if(data?.access_token) {
+            const decoded = jwtDecode(data?.access_token);
+            console.log('decoded', decoded);
+            if(decoded?.id) {
+                handleGetDetailsUser(decoded?.id, data?.access_token)
             }
-            localStorage.setItem('access_token', JSON.stringify(data?.access_token))
-            if(data?.access_token) {
-                const decoded = jwtDecode(data?.access_token);
-                console.log('decoded', decoded);
-                if(decoded?.id) {
-                    handleGetDetailsUser(decoded?.id, data?.access_token)
-                }
-            }
+        }
         }
     }, [isSuccess])
 

@@ -28,14 +28,13 @@ const SignUpPage = () => {
         data => userService.signupUser(data)
     )
     const {data, isPending, isSuccess, isError} = mutation
-    console.log(mutation);
+    console.log("huy",mutation);
     useEffect(() => {
-        if(isSuccess) {
+        if(data?.status === 'ERR') {           
+             message.error();
+        }else if(isSuccess){
             message.success();
-            handleNavigateSignIn();
-        }else if(isError) {
-            message.error();
-        }
+            handleNavigateSignIn();        }
     }, [isSuccess, isError])
     //handle input
     const handleOnChangeEmail = (value) => {
