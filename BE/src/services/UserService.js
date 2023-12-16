@@ -8,10 +8,10 @@ const userService = {
         try {
             const { email, password, confirmPassword } = newUser;
             const user = await User.findOne({ where: { email } });
+            console.log(user)
             if (user) return resolve({
                 status: 'ERR',
-                message: 'Email is exit',
-                data
+                message: 'Email is exit'
             });
 
             const hash = bcrypt.hashSync(password, 10)
@@ -36,14 +36,14 @@ const userService = {
             const user = await User.findOne({ where: { email } });
             if (user === null) return resolve({
                 status: 'ERR',
-                message: 'Email is not exit',
-                data
+                message: 'Email is not exit'
             });
+
+            const comparePassword = bcrypt.compareSync(password, user.password)
 
             if (!comparePassword) return resolve({
                 status: 'ERR',
-                message: 'Password is not correct',
-                data
+                message: 'Password is not correct'
             });
 
 

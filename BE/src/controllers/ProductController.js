@@ -4,7 +4,7 @@ const productController = {
     createProduct: async (req, res) => {
         try {
             const { name, image, type, countInStock, price, rating } = req.body
-            if (!name || !image || !type || !countInStock || !price || !rating ) {
+            if (!name || !image || !type || !countInStock || !price || !rating) {
                 return res.status(200).json({
                     status: 'ERR',
                     message: 'Input is required'
@@ -29,10 +29,8 @@ const productController = {
             }
             const response = await ProductService.updateProduct(productId, data)
             return res.status(200).json(response)
-        } catch (e) {
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     },
     getDetailProduct: async (req, res) => {
@@ -46,10 +44,8 @@ const productController = {
             }
             const response = await ProductService.getDetailsProduct(productId)
             return res.status(200).json(response)
-        } catch (e) {
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     },
     deleteProduct: async (req, res) => {
@@ -63,10 +59,8 @@ const productController = {
             }
             const response = await ProductService.deleteProduct(productId)
             return res.status(200).json(response)
-        } catch (e) {
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     },
     getAllProduct: async (req, res) => {
@@ -74,10 +68,8 @@ const productController = {
             const { limit, page, sort, filter } = req.query
             const response = await ProductService.getAllProduct(Number(limit) || null, Number(page) || 0, sort, filter)
             return res.status(200).json(response)
-        } catch (e) {
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     },
     deleteMany: async (req, res) => {
@@ -91,20 +83,16 @@ const productController = {
             }
             const response = await ProductService.deleteManyProduct(ids)
             return res.status(200).json(response)
-        } catch (e) {
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     },
     getAllType: async (req, res) => {
         try {
             const response = await ProductService.getAllType()
             return res.status(200).json(response)
-        } catch (e) {
-            return res.status(404).json({
-                message: e
-            })
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
         }
     }
 }
