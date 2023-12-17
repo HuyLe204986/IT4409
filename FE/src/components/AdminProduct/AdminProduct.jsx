@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PlusOutlined, DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Form, Select, Space } from 'antd';
+import { Button, Form, Select, Space, Tooltip } from 'antd';
 import { WrapperHeader, WrapperUploadFile } from './style';
 import TableComponent from '../TableComponent/TableComponent';
 import InputComponent from '../InputComponent/InputComponent';
@@ -281,6 +281,14 @@ const AdminProduct = () => {
             title: 'Name',
             dataIndex: 'name',
             // render: (text) => <a>{text}</a>,
+            ellipsis: {
+                showTitle: false,
+            },
+            render: (name) => (
+                <Tooltip placement="topLeft" title={name}>
+                    {name}
+                </Tooltip>
+            ),
             sorter: (a, b) => a.name.length - b.name.length,
             ...getColumnSearchProps('name'),
         },
@@ -497,7 +505,7 @@ const AdminProduct = () => {
             type: value,
         });
     };
-
+    console.log('image-admin product', stateProduct)
     return (
         <div>
             <WrapperHeader>Quản lý sản phẩm</WrapperHeader>

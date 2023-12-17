@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PlusOutlined, EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Form, Space } from 'antd';
+import { Button, Form, Space, Tooltip } from 'antd';
 import { WrapperHeader, WrapperUploadFile } from './style';
 import TableComponent from '../TableComponent/TableComponent';
 import DrawerComponent from '../DrawerComponent/DrawerComponent';
@@ -226,6 +226,14 @@ const AdminUser = () => {
         {
             title: 'Name',
             dataIndex: 'name',
+            ellipsis: {
+                showTitle: false,
+            },
+            render: (name) => (
+            <Tooltip placement="topLeft" title={name}>
+                {name}
+            </Tooltip>
+            ),
             sorter: (a, b) => a.name.length - b.name.length,
             ...getColumnSearchProps('name'),
         },
@@ -238,6 +246,14 @@ const AdminUser = () => {
         {
             title: 'Address',
             dataIndex: 'address',
+            ellipsis: {
+                showTitle: false,
+            },
+            render: (address) => (
+                <Tooltip placement="topLeft" title={address}>
+                    {address}
+                </Tooltip>
+            ),
             sorter: (a, b) => {
                 if(!a.address) a.address = '';
                 if(!b.address) b.address = '';

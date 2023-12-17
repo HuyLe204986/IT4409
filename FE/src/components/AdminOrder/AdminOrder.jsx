@@ -1,5 +1,5 @@
-import { Button, Space } from 'antd'
-import React from 'react'
+import { Button, Space, Tooltip } from 'antd'
+import React, { useEffect } from 'react'
 import { WrapperHeader } from './style'
 import TableComponent from '../TableComponent/TableComponent'
 import InputComponent from '../InputComponent/InputComponent'
@@ -14,17 +14,16 @@ import { orderContant } from '../../contant'
 
 const AdminOrder = () => {
   const user = useSelector((state) => state?.user)
-
+  // console.log('user', user);
 
   const getAllOrder = async () => {
     const res = await OrderService.getAllOrder(user?.access_token)
-    return res
+    return res;
   }
-
 
   const queryOrder = useQuery({ queryKey: ['orders'], queryFn: getAllOrder })
   const { isPending: isLoadingOrders, data: orders } = queryOrder
-
+  console.log('que', queryOrder);
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div
@@ -102,6 +101,14 @@ const AdminOrder = () => {
     {
       title: 'User name',
       dataIndex: 'userName',
+      ellipsis: {
+        showTitle: false,
+    },
+      render: (name) => (
+        <Tooltip placement="topLeft" title={name}>
+            {name}
+        </Tooltip>
+    ),
       sorter: (a, b) => a.userName.length - b.userName.length,
       ...getColumnSearchProps('userName')
     },
@@ -114,6 +121,14 @@ const AdminOrder = () => {
     {
       title: 'Address',
       dataIndex: 'address',
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (address) => (
+        <Tooltip placement="topLeft" title={address}>
+            {address}
+        </Tooltip>
+    ),
       sorter: (a, b) => a.address.length - b.address.length,
       ...getColumnSearchProps('address')
     },
@@ -144,8 +159,8 @@ const AdminOrder = () => {
   ];
 
   const dataTable = orders?.data?.length && orders?.data?.map((order) => {
-    console.log('user', order)
-    return { ...order, key: order._id, userName: order?.shippingAddress?.fullName, phone: order?.shippingAddress?.phone, address: order?.shippingAddress?.address, paymentMethod: orderContant.payment[order?.paymentMethod],isPaid: order?.isPaid ? 'TRUE' :'FALSE',isDelivered: order?.isDelivered ? 'TRUE' : 'FALSE', totalPrice: convertPrice(order?.totalPrice)}
+    // console.log('user', order)
+    return { ...order, key: order.id, userName: order?.fullName, phone: order?.phone, address: order?.address, paymentMethod: orderContant.payment[order?.paymentMethod],isPaid: order?.isPaid ? 'TRUE' :'FALSE',isDelivered: order?.isDelivered ? 'TRUE' : 'FALSE', totalPrice: convertPrice(order?.totalPrice)}
   })
 
   return (
