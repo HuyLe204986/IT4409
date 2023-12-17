@@ -12,7 +12,7 @@ module.exports = {
       },
       name: { type: Sequelize.STRING, allowNull: false },
       amount: { type: Sequelize.INTEGER, allowNull: false },
-      image: { type: Sequelize.STRING, allowNull: false },
+      image: { type: Sequelize.TEXT, allowNull: false },
       price: { type: Sequelize.FLOAT, allowNull: false },
       discount: { type: Sequelize.FLOAT },
       orderId: { type: Sequelize.INTEGER, allowNull: false },

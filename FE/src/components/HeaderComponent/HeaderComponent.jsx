@@ -73,8 +73,8 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     }
 
     return (
-        <div style={{ width: '100%', display: 'flex', background: '#9255FD', justifyContent: 'center' }}>
-            <WrapperHeader style={{justifyContent: isHiddenCart && isHiddenSearch ?  'space-between' : 'unset', background: '#9255FD'}}>
+        <div style={{ width: '100%', display: 'flex', background: '#169c2c', justifyContent: 'center' }}>
+            <WrapperHeader style={{justifyContent: isHiddenCart && isHiddenSearch ?  'space-between' : 'unset', background: '#169c2c'}}>
                 <Col span={5}>
                     <WrapperTextHeader style={{cursor: 'pointer'}} to='/'>SHOP CONG NGHE</WrapperTextHeader>
                 </Col>
@@ -89,7 +89,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                             // enterButton="Search"
                             // size="large"
                             onChange={onSearch}
-                            bgcButton="#5a20c1"
+                            bgcButton="#333333"
                         />
                     </Col>
                 )}

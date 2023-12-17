@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       avatar: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       city: {
         type: Sequelize.STRING

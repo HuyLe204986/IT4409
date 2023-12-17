@@ -76,13 +76,13 @@ const AdminOrder = () => {
   
   const getAllOrder = async () => {
     const res = await OrderService.getAllOrder(user?.access_token)
-    return res
+    return res;
   }
 
 
   const queryOrder = useQuery({ queryKey: ['orders'], queryFn: getAllOrder })
   const { isPending: isLoadingOrders, data: orders } = queryOrder
-
+  console.log('que', queryOrder);
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div
@@ -141,6 +141,14 @@ const AdminOrder = () => {
     {
       title: 'User name',
       dataIndex: 'userName',
+      ellipsis: {
+        showTitle: false,
+    },
+      render: (name) => (
+        <Tooltip placement="topLeft" title={name}>
+            {name}
+        </Tooltip>
+    ),
       sorter: (a, b) => a.userName.length - b.userName.length,
       ...getColumnSearchProps('userName')
     },
@@ -153,6 +161,14 @@ const AdminOrder = () => {
     {
       title: 'Address',
       dataIndex: 'address',
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (address) => (
+        <Tooltip placement="topLeft" title={address}>
+            {address}
+        </Tooltip>
+    ),
       sorter: (a, b) => a.address.length - b.address.length,
       ...getColumnSearchProps('address')
     },
@@ -256,6 +272,5 @@ const AdminOrder = () => {
       </div>
     </div>
   )
-}
-
-export default AdminOrder
+})};
+export default AdminOrder;
