@@ -228,6 +228,32 @@ const orderService = {
         } catch (e) {
             reject(e.message)
         }
+    }),
+
+    updateOrder: (orderId, isPaid, isDelivered) => new Promise(async (resolve, reject) => {
+        try {
+            const order = await Order.findOne({where: {id: orderId}})
+            if (order === null) {
+                resolve({
+                    status: 'ERR',
+                    message: 'Order is not defined'
+                })
+            }
+
+            await Order.update({isPaid, isDelivered},{ where: {id: orderId}});
+
+            const updatedOrder = await Order.findOne({where: {id: orderId}});
+
+            console.log('huyhuy333', orderId, updatedOrder);
+
+            resolve({
+                status: 'OK',
+                message: 'SUCCESS',
+                data: updatedOrder
+            })
+        } catch (e) {
+            reject(e.message)
+        }
     })
 }
 
