@@ -5,11 +5,12 @@ import logo from '../../assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { convertPrice } from '../../utils';
 const CardComponent = (props) => {
-    const {countInStock, description, image, name, price, rating, type, selled, discount, id} = props;
+    const {countInStock, description,image, name, price, rating, type, selled, discount, id} = props;
     const navigate = useNavigate()
     const handleDetailsProduct = (id) => {
         navigate(`/product-details/${id}`)
     }
+    console.log('image', image);
     return (
         <WrapperCardStyle
             hoverable
@@ -39,7 +40,7 @@ const CardComponent = (props) => {
                     <span>{rating} </span>
                     <StarFilled style={{ fontSize: '12px', color: '#FFCE3E' }} />
                 </span>
-                <WrapperStyleTextSell> | Đã bán {selled || 1000}+</WrapperStyleTextSell>
+                <WrapperStyleTextSell> | Đã bán {selled || 0}</WrapperStyleTextSell>
             </WrapperReportText>
             <WrapperPriceText>
                 <span style={{marginRight: '8px'}}>{convertPrice(price)}</span>
