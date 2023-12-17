@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleNameProduct, WrapperCardStyle, WrapperDiscountText, WrapperPriceText, WrapperReportText, WrapperStyleTextSell } from './style';
-import { StarFilled } from '@ant-design/icons';
+import { StyleNameProduct, WrapperCardStyle, WrapperDiscountText, WrapperFavourite, WrapperPriceText, WrapperReportText, WrapperStyleTextSell } from './style';
+import { StarFilled, CheckOutlined } from '@ant-design/icons';
 import logo from '../../assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { convertPrice } from '../../utils';
+import DiscountComponent from '../DiscountComponent/DiscountComponent';
 const CardComponent = (props) => {
     const {countInStock, description,image, name, price, rating, type, selled, discount, id} = props;
     const navigate = useNavigate()
@@ -22,7 +23,7 @@ const CardComponent = (props) => {
             cover={<img alt="example" src={image} />}
             onClick={() => handleDetailsProduct(id)}
         >
-            <img
+            {/* <img
                 src={logo}
                 alt="logo"
                 style={{
@@ -33,7 +34,15 @@ const CardComponent = (props) => {
                     left: -1,
                     borderTopLeftRadius: 3,
                 }}
-            />
+            /> */}
+            {rating >= 3 && (
+                <WrapperFavourite>
+                    <CheckOutlined style={{color: '#fff', margin: '0 3px'}}/>
+                    <span style={{color: '#fff'}}>Yêu thích</span>
+                </WrapperFavourite>
+                )
+            }
+            <DiscountComponent discount={discount}></DiscountComponent>
             <StyleNameProduct>{name}</StyleNameProduct>
             <WrapperReportText>
                 <span style={{ marginRight: '4px' }}>
@@ -43,8 +52,9 @@ const CardComponent = (props) => {
                 <WrapperStyleTextSell> | Đã bán {selled || 0}</WrapperStyleTextSell>
             </WrapperReportText>
             <WrapperPriceText>
-                <span style={{marginRight: '8px'}}>{convertPrice(price)}</span>
-                <WrapperDiscountText> - {discount || 5} % </WrapperDiscountText>
+                <span style={{marginRight: '8px', fontSize: '18px'}}>{convertPrice(priceAfterDiscount)}</span>
+                <span style={{marginRight: '4px', fontSize: '12px', color: '#999', textDecoration: 'line-through'}}>{convertPrice(price)}</span>
+                {/* <WrapperDiscountText> - {discount || 5} % </WrapperDiscountText> */}
             </WrapperPriceText>
         </WrapperCardStyle>
     );
