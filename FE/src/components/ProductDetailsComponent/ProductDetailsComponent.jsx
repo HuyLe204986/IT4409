@@ -1,14 +1,19 @@
-import { Row, Col, Image, Rate } from 'antd';
+import { Row, Col, Image, Rate, Button } from 'antd';
 import React, { useEffect } from 'react';
-import {  PlusOutlined, MinusOutlined } from '@ant-design/icons';
+import {  PlusOutlined, MinusOutlined, GiftOutlined } from '@ant-design/icons';
 import imageProductSmall from '../../assets/images/product-img-small.webp';
 import {
     WrapperAddressProduct,
+    WrapperGiftContent,
+    WrapperGiftHeader,
+    WrapperGiftItem,
     WrapperInputNumber,
+    WrapperOldPriceProduct,
     WrapperPriceProduct,
     WrapperPriceTextProduct,
     WrapperQuanlityProduct,
     WrapperStyleColImage,
+    WrapperStyleDescProduct,
     WrapperStyleImageSmall,
     WrapperStyleNameProduct,
     WrapperStyleTextSell,
@@ -23,6 +28,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { addOrderProduct, resetOrder } from '../../redux/slides/orderSlide';
 import { convertPrice, initFacebookSDK } from '../../utils';
 import * as message from '../Message/Message'
+import InputComponent from '../InputComponent/InputComponent';
+import CommentComponent from '../CommentComponent/CommentComponent';
 // import LikeButtonComponent from '../LikeButtonComponent/LikeButtonComponent';
 // import CommentComponent from '../CommentComponent/CommentComponent';
 
@@ -103,15 +110,22 @@ const ProductDetailsComponent = ({ idProduct }) => {
             
         }
     }
+
+    const handleBuyProduct = () => {
+        handleAddOrderProduct();
+        navigate('/payment')
+    }
     
     const { isLoading, data: productDetails } = useQuery({
         queryKey: ['product-details', idProduct], // id của sản phẩm cần lấy
         queryFn: fetchGetDetailsProduct, 
         enabled: !!idProduct
     });
+
+    const productAfterDiscount = productDetails?.price * (100 - Number(productDetails?.discount)) / 100
     return (
         <Loading isLoading={isLoading}>
-            <Row style={{ padding: '16px', background: '#fff', borderRadius: '4px', height:'100%' }}>
+            <Row style={{ padding: '16px', background: '#fff', borderRadius: '4px', height:'560px', position: 'relative' }}>
                 <Col span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
                     <Image src={productDetails?.image} alt="image-product" preview={true} />
                     <Row style={{ paddingTop: '10px', justifyContent: 'space-between' }}>
@@ -142,12 +156,14 @@ const ProductDetailsComponent = ({ idProduct }) => {
                 </Col>
                 <Col span={14} style={{ paddingLeft: '10px' }}>
                     <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
+                    <WrapperStyleDescProduct>{productDetails?.description}</WrapperStyleDescProduct>
                     <div>
                     <Rate allowHalf defaultValue={productDetails?.rating} value={productDetails?.rating} />
-                        <WrapperStyleTextSell> | Đã bán 1000+</WrapperStyleTextSell>
+                        <WrapperStyleTextSell>Đã bán {productDetails?.selled}</WrapperStyleTextSell>
                     </div>
                     <WrapperPriceProduct>
-                        <WrapperPriceTextProduct>{convertPrice(productDetails?.price)}</WrapperPriceTextProduct>
+                        <WrapperPriceTextProduct>{convertPrice(productAfterDiscount)}</WrapperPriceTextProduct>
+                        <WrapperOldPriceProduct>{convertPrice(productDetails?.price)}</WrapperOldPriceProduct>
                     </WrapperPriceProduct>
                     <WrapperAddressProduct>
                         <span>Giao đến </span>
@@ -164,12 +180,15 @@ const ProductDetailsComponent = ({ idProduct }) => {
                     <div
                         style={{
                             margin: '10px 0 20px',
-                            padding: '10px 0',
+                            padding: '20px 0',
                             borderTop: '1px solid #e5e5e5',
                             borderBottom: '1px solid #e5e5e5',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
                         }}
                     >
-                        <div style={{ marginBottom: '10px' }}>Số lượng</div>
+                        <div>Số lượng</div>
                         <WrapperQuanlityProduct>
                             <button style={{ border: 'none', background: 'transparent', cursor:'pointer' }} onClick={() => handleChangeCount('decrease', numProduct === 1)}>
                                 <MinusOutlined style={{ color: '#000', fontSize: '20px' }} />
@@ -180,7 +199,18 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             </button>
                         </WrapperQuanlityProduct>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <WrapperGiftContent>
+                        <WrapperGiftHeader>
+                            <GiftOutlined />
+                            <span style={{marginLeft: '6px'}}>Quà tặng</span>
+                        </WrapperGiftHeader>
+                        <WrapperGiftItem>Balo hoặc túi chống sốc</WrapperGiftItem>
+                        <WrapperGiftItem>Chuột Bluetooth Rapoo M160 + Bàn di chuột</WrapperGiftItem>
+                        <WrapperGiftItem>Giảm 20% khi mua phụ kiện tại Lapvip</WrapperGiftItem>
+                        <WrapperGiftItem>Giao máy 30P nội thành, miễn phí vận chuyển toàn quốc</WrapperGiftItem>
+                        <WrapperGiftItem>Miễn phí cài đặt phần mềm, vệ sinh máy trong suốt thời gian sử dụng</WrapperGiftItem>
+                    </WrapperGiftContent>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'absolute', bottom: 0, right: 0}}>
                         <div>
                             <ButtonComponent
                                 size={40}
@@ -192,7 +222,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                     borderRadius: '4px',
                                 }}
                                 onClick={handleAddOrderProduct}
-                                textButton={'Chọn mua'}
+                                textButton={'Thêm vào giỏ hàng'}
                                 styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                             ></ButtonComponent>
                             {errorLimitOrder && <div style={{color: 'red'}}>Sản phẩm đã hết hàng</div>}
@@ -206,7 +236,8 @@ const ProductDetailsComponent = ({ idProduct }) => {
                                 border: '1px solid rgb(13, 92, 182)',
                                 borderRadius: '4px',
                             }}
-                            textButton={'Mua trả sau'}
+                            textButton={'Mua ngay'}
+                            onClick={handleBuyProduct}
                             styleTextButton={{ color: 'rgb(13, 92, 182)', fontSize: '15px' }}
                         ></ButtonComponent>
                     </div>
@@ -219,7 +250,12 @@ const ProductDetailsComponent = ({ idProduct }) => {
                     } 
                     width="1270"
                 /> */}
+
             </Row>
+            <InputComponent style={{marginTop: '30px', height: '80px'}} placeholder="Viết bình luận của bạn"/>
+            <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '10px'}}><Button>Gửi</Button></div>
+
+            <CommentComponent avatar="https://th.bing.com/th/id/OIP.hOiJYsPoj5A0ozax8YgrUgHaHa?w=204&h=204&c=7&r=0&o=5&dpr=1.4&pid=1.7" name="Huy" content="sản phẩm tốt"></CommentComponent>
         </Loading>
     );
 };

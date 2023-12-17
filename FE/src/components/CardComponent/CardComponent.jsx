@@ -12,6 +12,7 @@ const CardComponent = (props) => {
         navigate(`/product-details/${id}`)
     }
     console.log('image', image);
+    const priceAfterDiscount = price*(100-Number(discount)) / 100;
     return (
         <WrapperCardStyle
             hoverable
