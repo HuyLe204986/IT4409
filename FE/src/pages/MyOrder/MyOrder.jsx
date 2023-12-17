@@ -28,7 +28,7 @@ const MyOrder = () => {
     console.log('order', data);
     useEffect(() => {
         queryOrder.refetch();
-    }, [data.length]);
+    }, [data?.length]);
     const renderProduct =  (data) => {
         return data?.map((order) => {
             return <WrapperHeaderItem key={order?.id}> 
