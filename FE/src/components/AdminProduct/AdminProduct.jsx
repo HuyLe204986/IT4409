@@ -24,7 +24,7 @@ const AdminProduct = () => {
     // const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
     const user = useSelector((state) => state?.user);
-    console.log('user', user);
+    // console.log('user', user);
     const inittial = () => ({
         name: '',
         price: '',
@@ -99,6 +99,7 @@ const AdminProduct = () => {
             {
                 onSettled: () => {
                     queryProduct.refetch();
+                    typeProduct.refetch();
                 },
             },
         );
@@ -340,7 +341,7 @@ const AdminProduct = () => {
         products?.data?.map((product) => {
             return {
                 ...product,
-                key: product._id,
+                key: product.id,
             };
         });
 
@@ -380,6 +381,7 @@ const AdminProduct = () => {
             {
                 onSettled: () => {
                     queryProduct.refetch();
+                    typeProduct.refetch();
                 },
             },
         );
@@ -424,7 +426,7 @@ const AdminProduct = () => {
     }, [isSuccessUpdated]);
 
     const onFinish = () => {
-        console.log('finisd');
+        // console.log('finisd');
         const params = {
             name: stateProduct.name,
             price: stateProduct.price,
@@ -438,9 +440,9 @@ const AdminProduct = () => {
         mutation.mutate(params, {
             onSettled: () => {
                 queryProduct.refetch();
+                typeProduct.refetch();
             },
         });
-    
     };
     const handleOnChange = (e) => {
         setStateProduct({
@@ -517,7 +519,7 @@ const AdminProduct = () => {
                         return {
                             onClick: (event) => {
                                 //click row
-                                setRowSelected(record._id);
+                                setRowSelected(record.id);
                             },
                         };
                     }}
@@ -537,7 +539,6 @@ const AdminProduct = () => {
                             maxWidth: 600,
                         }}
                         onFinish={onFinish}
-                        autoComplete="on"
                         form={form}
                     >
                         <Form.Item

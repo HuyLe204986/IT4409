@@ -99,7 +99,7 @@ const AdminOrder = () => {
 };
 
   const queryOrder = useQuery({ queryKey: ['orders'], queryFn: getAllOrder })
-  const { isLoading: isLoadingOrders, data: orders } = queryOrder
+  const { isPending: isLoadingOrders, data: orders } = queryOrder
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -227,7 +227,7 @@ const AdminOrder = () => {
   const dataTable = orders?.data?.length && orders?.data?.map((order) => {
     //console.log('usewr', order)
     return { ...order, key: order._id, userName: order?.fullName, phone: order?.phone, address: order?.address, paymentMethod: orderContant.payment[order?.paymentMethod],isPaid: order?.isPaid ? 'TRUE' :'FALSE',isDelivered: order?.isDelivered ? 'TRUE' : 'FALSE', totalPrice: convertPrice(order?.totalPrice)}
-  })
+
 
   const handleCloseDrawer = () => {
     setIsOpenDrawer(false);

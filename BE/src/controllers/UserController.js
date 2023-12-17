@@ -72,7 +72,7 @@ const userController = {
     updateUser: async (req, res) => {
         try {
             const userId = req.params.id;
-            console.log(userId);
+            console.log('update',userId);
             const data = req.body;
             if (!userId) {
                 return res.status(200).json({

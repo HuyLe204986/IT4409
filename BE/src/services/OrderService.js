@@ -75,7 +75,7 @@ const orderService = {
                         productId: order.product,
                     })
                 })
-                console.log('OK');
+                // console.log('OK');
                 resolve({
                     status: 'OK',
                     message: 'create order success'
@@ -89,27 +89,37 @@ const orderService = {
 
     getAllOrderDetails: (id) => new Promise(async (resolve, reject) => {
         try {
-            console.log('userid', id);
+            // console.log('userid', id);
             let orders = await Order.findAll({
                 where: { userId: id },
                 order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
             });
 
+            // console.log('order sservice', orders);
+            // console.log('order length', orders.length);
             if (orders === null) {
                 resolve({
                     status: 'ERR',
                     message: 'The order is not defined'
                 })
             }
-
+            if(orders.length === 0) {
+                resolve({
+                    status: 'OK',
+                    message: 'SUCESSS',
+                    data: []
+                })
+            }
             orders.forEach(async (order, index) => {
                 const orderItems = await OrderItem.findAll({
                     where: { orderId: order.id },
                     order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
                 });
+                // console.log('ỏderitems', orderItems);
                 orders[index].dataValues.orderItems = orderItems;
 
                 if (index + 1 == orders.length) {
+                    // console.log('OK');
                     resolve({
                         status: 'OK',
                         message: 'SUCESSS',
@@ -118,8 +128,9 @@ const orderService = {
                 }
 
             })
+
         } catch (e) {
-            // console.log('e', e)
+            console.log('e', e)
             reject(e.message)
         }
     }),
@@ -157,6 +168,7 @@ const orderService = {
                 const productData = await Product.findOne({
                     where: { id: order.productId }
                 })
+                // console.log('productData', productData);
                 if (productData) {
                     await Product.update(
                         {
@@ -168,12 +180,11 @@ const orderService = {
                         }
                     );
                 }
-                console.log('id', order.id);
+                // console.log('id', order.id);
                 await OrderItem.destroy({ where: { id: order.id } })
 
             })
             await Order.destroy({ where: { id: id } })
-
 
             resolve({
                 status: 'OK',
