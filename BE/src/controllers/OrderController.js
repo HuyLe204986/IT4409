@@ -69,6 +69,18 @@ const orderController = {
         } catch (error) {
             return res.status(404).json({ message: error?.message });
         }
+    },
+
+    updateOrder: async (req, res) => {
+        try {
+            const orderId = req.params.id
+            // console.log('huyhuy111', orderId, req.body);
+            const { isPaid, isDelivered } = req.body
+            const data = await OrderService.updateOrder(orderId, isPaid, isDelivered)
+            return res.status(200).json(data)
+        } catch (error) {
+            return res.status(404).json({ message: error?.message });
+        }
     }
 
 
