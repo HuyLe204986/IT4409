@@ -44,6 +44,7 @@ const HomePage = () => {
         retryDelay: 1000,
         placeholderData: true
     })
+    console.log('pro', products);
     // console.log("prev", isPlaceholderData, isLoading);
     return (
         <Loading isLoading={isLoading || loading}>

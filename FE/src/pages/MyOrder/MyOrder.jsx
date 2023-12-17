@@ -95,7 +95,7 @@ const MyOrder = () => {
                 <div style={{height: '100%', width: '1270px', margin: '0 auto'}}>
                     <h4>Đơn hàng của tôi</h4>
                     <WrapperListOrder>
-                        {data?.map((order) => {
+                        { Array.isArray(data) && data?.map((order) => {
                         return (
                             <WrapperItemOrder key={order?.id}>
                             <WrapperStatus>

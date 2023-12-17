@@ -40,7 +40,7 @@ const TableComponent = (props) => {
     return (
         <div>
            <Loading isLoading={isLoading}>
-                {rowSelectedKeys.length > 0 && (
+                {(rowSelectedKeys.length > 0 && handleDeleteMany) && (
                     <div style={{
                         background: '#1d1ddd',
                         color: '#fff',

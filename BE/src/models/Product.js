@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     Product.init({
         name: { type: DataTypes.STRING, allowNull: false, unique: true },
-        image: { type: DataTypes.STRING, allowNull: false },
+        image: { type: DataTypes.TEXT, allowNull: false },
         type: { type: DataTypes.STRING, allowNull: false },
         price: { type: DataTypes.NUMBER, allowNull: false },
         countInStock: { type: DataTypes.NUMBER, allowNull: false },

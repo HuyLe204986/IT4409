@@ -103,7 +103,7 @@ const orderService = {
                     message: 'The order is not defined'
                 })
             }
-            if(orders.length === 0) {
+            if (orders.length === 0) {
                 resolve({
                     status: 'OK',
                     message: 'SUCESSS',
