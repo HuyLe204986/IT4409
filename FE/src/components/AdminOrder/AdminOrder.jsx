@@ -141,14 +141,6 @@ const AdminOrder = () => {
     {
       title: 'User name',
       dataIndex: 'userName',
-      ellipsis: {
-        showTitle: false,
-    },
-      render: (name) => (
-        <Tooltip placement="topLeft" title={name}>
-            {name}
-        </Tooltip>
-    ),
       sorter: (a, b) => a.userName.length - b.userName.length,
       ...getColumnSearchProps('userName')
     },
@@ -161,14 +153,6 @@ const AdminOrder = () => {
     {
       title: 'Address',
       dataIndex: 'address',
-      ellipsis: {
-        showTitle: false,
-      },
-      render: (address) => (
-        <Tooltip placement="topLeft" title={address}>
-            {address}
-        </Tooltip>
-    ),
       sorter: (a, b) => a.address.length - b.address.length,
       ...getColumnSearchProps('address')
     },
@@ -272,5 +256,6 @@ const AdminOrder = () => {
       </div>
     </div>
   )
-})};
+}
+
 export default AdminOrder;
