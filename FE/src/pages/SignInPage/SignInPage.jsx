@@ -115,7 +115,7 @@ const SignInPage = () => {
                         }
                         </span>
                         <InputForm
-                            placeholder="password"
+                            placeholder="123456"
                             type={isShowPassword ? "text" : "password"}
                             value={password}
                             onChange={handleOnchangePassword}

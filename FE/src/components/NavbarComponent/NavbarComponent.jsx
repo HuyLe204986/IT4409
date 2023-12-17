@@ -49,7 +49,7 @@ const NavbarComponent = () => {
     };
     return (
         <div>
-            <WrapperLabelText>Label</WrapperLabelText>
+            <WrapperLabelText>Danh Mục</WrapperLabelText>
             <WrapperContent>
                 {renderContent('text', ['Điện thoại', 'Máy tỉnh bảng', 'Đồng hồ'])}
             </WrapperContent>

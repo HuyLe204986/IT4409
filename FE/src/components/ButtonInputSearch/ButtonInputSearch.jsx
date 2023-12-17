@@ -9,8 +9,8 @@ const ButtonInputSearch = (props) => {
         textButton, 
         bordered, 
         bgcInput = '#fff', 
-        bgcButton = 'rgb(13,92,182)',
-        colorButton = '#fff',  
+        bgcButton =   '#333333',
+        colorButton = '#333333',  
     
     } = props;
     return (

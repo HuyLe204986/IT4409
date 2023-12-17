@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 // Styled components
 const FooterContainer = styled.footer`
-  background-color: #f0f0f0;
+  background-color: #333333;
   padding: 20px;
   text-align: center;
 `;
@@ -20,7 +20,7 @@ const FooterColumn = styled.div`
 `;
 
 const FooterTitle = styled.h4`
-  color: #333;
+  color: white;
   font-size: 18px;
 `;
 
