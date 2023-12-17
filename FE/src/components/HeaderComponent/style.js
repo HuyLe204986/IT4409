@@ -16,6 +16,11 @@ export const WrapperTextHeader = styled(Link)`
     color: #fff;
     font-weight: bold;
     text-align: left;
+
+    &:hover {
+        font-size: 18px;
+        color: #fff;
+    }
 `
 
 export const  WrapperHeaderAccount = styled.div`
@@ -24,6 +29,7 @@ export const  WrapperHeaderAccount = styled.div`
     color: #fff;
     gap: 10px;
     font-size: 12px;
+    max-width: 200px;
 `
 
 export const WrapperTextHeaderSmall = styled.span`

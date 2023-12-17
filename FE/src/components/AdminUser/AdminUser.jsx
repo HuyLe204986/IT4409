@@ -95,7 +95,7 @@ const AdminUser = () => {
     };
 
     const fetchGetDetailsUser = async (rowSelected) => {
-        const res = await userService.getDetailsUser(rowSelected);
+        const res = await userService.getDetailsUser(rowSelected, user?.access_token);
         if (res?.data) {
             setStateUserDetails({
                 name: res?.data.name,
@@ -130,7 +130,6 @@ const AdminUser = () => {
         queryFn: getAllUsers,
     });
     const { isLoading: isLoadingUsers, data: users } = queryUser;
-
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         // setSearchText(selectedKeys[0]);
@@ -239,7 +238,11 @@ const AdminUser = () => {
         {
             title: 'Address',
             dataIndex: 'address',
-            sorter: (a, b) => a.address.length - b.address.length,
+            sorter: (a, b) => {
+                if(!a.address) a.address = '';
+                if(!b.address) b.address = '';
+                return a.address.length - b.address.length
+            },
             ...getColumnSearchProps('address'),
         },
         {
@@ -255,6 +258,13 @@ const AdminUser = () => {
                     value: false,
                 },
             ],
+            onFilter: (value, record) => {
+            //    console.log(typeof record.isAdmin);
+                if(value) {
+                    return record.isAdmin === 'True'
+                }
+                return record.isAdmin === 'False';
+            },
         },
         {
             title: 'Phone',
@@ -273,7 +283,7 @@ const AdminUser = () => {
         users?.data?.map((user) => {
             return {
                 ...user,
-                key: user._id,
+                key: user.id,
                 isAdmin: user.isAdmin ? 'True' : 'False',
             };
         });
@@ -382,7 +392,7 @@ const AdminUser = () => {
                         return {
                             onClick: (event) => {
                                 //click row
-                                setRowSelected(record._id);
+                                setRowSelected(record.id);
                             },
                         };
                     }}

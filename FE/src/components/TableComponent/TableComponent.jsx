@@ -23,6 +23,7 @@ const TableComponent = (props) => {
     };
     const handleDeleteAll = () => {
         handleDeleteMany(rowSelectedKeys)
+        setRowSelectedKeys([]);
     }
 
     const exportExcel = () => {
