@@ -358,5 +358,5 @@ const AdminOrder = () => {
       </div>
     </div>
   )
-})};
+};
 export default AdminOrder;
