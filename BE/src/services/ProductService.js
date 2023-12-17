@@ -51,7 +51,7 @@ const productService = {
 
             await Product.update(data,{ where: {id: id}});
 
-            const updatedProduct = await User.findOne({where: {id}});
+            const updatedProduct = await Product.findOne({where: {id}});
 
             resolve({
                 status: 'OK',
