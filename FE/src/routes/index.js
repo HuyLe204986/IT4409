@@ -12,6 +12,7 @@ import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
 import MyOrder from "../pages/MyOrder/MyOrder";
 import DetailsOrderPage from "../pages/DetailsOrderPage/DetailsOrderPage";
 import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
+import FastPaymentPage from "../pages/FastPaymentPage/FastPaymentPage";
 
 export const routes = [
     {
@@ -57,6 +58,11 @@ export const routes = [
     {
         path: '/payment',
         page: PaymentPage,
+        isShowHeader: true
+    },
+    {
+        path: '/payment-now',
+        page: FastPaymentPage,
         isShowHeader: true
     },
     {

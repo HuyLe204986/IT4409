@@ -45,7 +45,7 @@ return results
 
 export const convertPrice = (price) => {
   try {
-      const result  = price?.toLocaleString().replaceAll(',', '.')
+      const result  = Math.floor(price).toLocaleString().replaceAll(',', '.')
       return `${result} Đ`
   } catch (error) {
       return null

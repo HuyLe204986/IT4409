@@ -80,6 +80,7 @@ const DetailsOrderPage = () => {
                       border: '1px solid rgb(238, 238, 238)',
                       padding: '2px'
                     }}
+                    alt='product-img'
                   />
                   <div style={{
                     width: 260,
@@ -88,7 +89,7 @@ const DetailsOrderPage = () => {
                     whiteSpace:'nowrap',
                     marginLeft: '10px',
                     height: '70px',
-                  }}>Điện thoại</div>
+                  }}></div>
                 </WrapperNameProduct>
                 <WrapperItem>{convertPrice(order?.price)}</WrapperItem>
                 <WrapperItem>{order?.amount}</WrapperItem>
