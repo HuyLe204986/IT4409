@@ -117,7 +117,19 @@ const ProductDetailsComponent = ({ idProduct }) => {
     }
 
     const handleBuyProduct = () => {
-        navigate('/payment')
+        if(!user?.phone || !user.address || !user.name) {
+            message.error('Vui lòng cập nhật thông tin cá nhân để có thể đặt hàng')
+            navigate('/profile-user')
+        }else {
+            const {id: product, ...rest} = productDetails
+            navigate('/payment-now', {
+                state: {
+                    product,
+                    ...rest,
+                    amount: numProduct,
+                }
+            })
+        }
     }
     
     const { isLoading, data: productDetails } = useQuery({
@@ -137,7 +149,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
         data => commentService.addComment(data)
     )
 
-    const {data, isPending: isLoadingAddComment} = mutation
+    // const {data, isPending: isLoadingAddComment} = mutation
 
     const handleAddComment = async () => {
         // console.log('add commnet', comment, productDetails.id, user.email);

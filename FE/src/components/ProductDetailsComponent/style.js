@@ -73,8 +73,8 @@ export const WrapperInputNumber = styled(InputNumber) `
         border-top: none;
         border-bottom: none;
        
-        &.ant-input-number-handler-wrap {
-            display: none;
+        .ant-input-number-handler-wrap {
+            display: none !important;
         }
     }
 
