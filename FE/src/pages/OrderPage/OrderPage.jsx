@@ -362,7 +362,7 @@ const OrderPage = () => {
                                         justifyContent: 'space-between',
                                     }}
                                 >
-                                    <span>Tạm tính</span>
+                                    <span>Giá gốc</span>
                                     <span style={{ color: '#000', fontSize: '14px', fontWeight: 'bold' }}>
                                         {convertPrice(priceMemo)}
                                     </span>
@@ -376,7 +376,7 @@ const OrderPage = () => {
                                 >
                                     <span>Giảm giá</span>
                                     <span
-                                        style={{ color: '#000', fontSize: '14px', fontWeight: 'bold' }}
+                                        style={{ color: '#000', fontSize: '14px', fontWeight: 'bold', margin: '6px 0' }}
                                     >{convertPrice(priceDiscountMemo)}</span>
                                 </div>
                                 <div

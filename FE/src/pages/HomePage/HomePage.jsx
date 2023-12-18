@@ -12,6 +12,7 @@ import * as productService from '../../services/ProductService';
 import { useQuery } from '@tanstack/react-query'
 import Loading from '../../components/LoadingComponent/Loading'
 import Footer from '../../components/FooterComponent/FooterComponent'
+import { Col, Row } from 'antd'
 const HomePage = () => {
   const searchProduct = useSelector((state) => state?.product?.search)
     const searchDebounce = useDebounce(searchProduct, 500)
@@ -58,19 +59,21 @@ const HomePage = () => {
                 </WrapperTypeProduct>
             </div>
             <div className='body' style={{ width: '100%', backgroundColor: '#efefef' }}>
-                <div style={{ display:'flex',marginLeft: '62px ', width: '100%'}}>
-                    <div style={{display: 'block', width: '50%'}}>
-                    <SliderComponent
-                        arrImages={[
-                            slider1,
-                            slider2,
-                            slider3,
-                        ]}
-                    />
-                    </div>
-                     <div id="new" style={{flex: 1}}><h>Tin tức</h> </div>
-                </div>
-                <div id="container" style={{ margin: '0 auto', width: '1270px' }}>    
+                <div id="container" style={{ margin: '0 auto', width: '1270px', paddingTop: '20px' }}>     
+                        <Row gutter={[16, 16]}>
+                            <Col span={16}>
+                                <SliderComponent
+                                    arrImages={[
+                                        slider1,
+                                        slider2,
+                                        slider3,
+                                    ]}
+                                />
+                            </Col>
+                            <Col span={8}>      
+                            <div id="new" style={{flex: 1}}><h4>Tin tức</h4> </div>
+                            </Col>
+                        </Row>
                     <WrapperProducts>
                         {products?.data?.map((product) => {
                             return (

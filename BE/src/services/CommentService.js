@@ -30,24 +30,31 @@ const commentService = {
                 order: [['createdAt', 'DESC'], ['updatedAt', 'DESC']],
             })
 
-
-            comments.forEach(async (comment, index) => {
-                const user = await User.findOne({
-                    where: { email: comment.email }
+            if(comments.length === 0) {
+                resolve({
+                    status: 'OK',
+                    message: 'No comments',
+                    data: []
                 })
-
-                comments[index].dataValues.name = user.dataValues.name
-                comments[index].dataValues.avata = user.dataValues.avatar
-                console.log('huyhuy1111', comments);
-
-                if (index + 1 === comments.length) {
-                    resolve({
-                        status: 'OK',
-                        message: 'GET ALL SUCCESS',
-                        data: comments
+            }else {
+                comments.forEach(async (comment, index) => {
+                    const user = await User.findOne({
+                        where: { email: comment.email }
                     })
-                }
-            });
+    
+                    comments[index].dataValues.name = user.dataValues.name
+                    comments[index].dataValues.avata = user.dataValues.avatar
+                    console.log('huyhuy1111', comments);
+    
+                    if (index + 1 === comments.length) {
+                        resolve({
+                            status: 'OK',
+                            message: 'GET ALL SUCCESS',
+                            data: comments
+                        })
+                    }
+                });
+            }
         } catch (error) {
             reject(error);
         }
