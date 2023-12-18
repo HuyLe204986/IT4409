@@ -58,7 +58,7 @@ const HomePage = () => {
                     
                 </WrapperTypeProduct>
             </div>
-            <div className='body' style={{ width: '100%', backgroundColor: '#efefef' }}>
+            <div className='body' style={{ width: '100%', backgroundColor: '#efefef' }}
                 <div id="container" style={{ margin: '0 auto', width: '1270px', paddingTop: '20px' }}>     
                         <Row gutter={[16, 16]}>
                             <Col span={16}>
