@@ -26,7 +26,7 @@ const authAdminMiddleWare = (req, res, next) => {
 
 const authUserMiddleWare = (req, res, next) => {
     const token = req.headers.token?.split(' ')[1];
-    console.log('header', req.headers);
+    // console.log('header', req.headers);
     console.log('tokennn', token);
     const userId = Number(req.params.id);
     console.log('userId', userId);

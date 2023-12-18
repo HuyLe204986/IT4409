@@ -11,7 +11,7 @@ const CardComponent = (props) => {
     const handleDetailsProduct = (id) => {
         navigate(`/product-details/${id}`)
     }
-    console.log('image', image);
+    // console.log('image', image);
     const priceAfterDiscount = price*(100-Number(discount)) / 100;
     return (
         <WrapperCardStyle
