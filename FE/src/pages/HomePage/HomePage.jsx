@@ -12,6 +12,7 @@ import * as productService from '../../services/ProductService';
 import { useQuery } from '@tanstack/react-query'
 import Loading from '../../components/LoadingComponent/Loading'
 import Footer from '../../components/FooterComponent/FooterComponent'
+import { Col, Row } from 'antd'
 const HomePage = () => {
   const searchProduct = useSelector((state) => state?.product?.search)
     const searchDebounce = useDebounce(searchProduct, 500)
@@ -57,40 +58,22 @@ const HomePage = () => {
                     
                 </WrapperTypeProduct>
             </div>
-            <div className='body' style={{ width: '100%', backgroundColor: '#efefef' }}>
-                <div style={{ display:'flex',marginLeft: '62px ', width: '100%'}}>
-                    <div class='right' style={{display: 'block', width: '55%'}}>
-                    <SliderComponent
-                        arrImages={[
-                            slider1,
-                            slider2,
-                            slider3,
-                        ]}
-                    />
-                    </div>
-                    <div class='left' style={{display:'block',paddingTop:'20px',flex: 1, marginLeft: '60px'}}>
-                    <div class="new" style={{padding:'10px',backgroundColor:'green'}} >
-                        <div class="title"style={{display:'block',boxSizing:'border-box'}}>
-                            <span class="name"style={{fontSize:'20px'}}>TIN CÔNG NGHỆ NỔI BẬT</span>
-                            <a href="#" style={{marginLeft:'50px',display: 'inline-block',color:'green' }}>Xem Tất Cả</a>
-                        </div>
-                        <div class="new-list">
-                            <div class="new">
-                            <div class="thumbnail">
-                                 <a href="" class="wrap-img">
-<img class="owl-lazy lazy" src="https://lapvip.vn/upload/news/thumb_77x55/bat-mi-cach-su-dung-surface-lau-hon-khi-pin-yeu-1616999503.jpg" alt="Bật mí cách sử dụng Surface lâu hơn khi pin yếu"></img>
-</a></div>
-                             <a href="" class="name"> <span>Bật mí cách sử dụng Surface lâu hơn khi pin yếu</span>
-</a>
-
-                            </div>
-
-                        </div>
-                    </div>
-                         </div>
-                     
-                </div>
-                <div id="container" style={{ margin: '0 auto', width: '1270px' }}>    
+            <div className='body' style={{ width: '100%', backgroundColor: '#efefef' }}
+                <div id="container" style={{ margin: '0 auto', width: '1270px', paddingTop: '20px' }}>     
+                        <Row gutter={[16, 16]}>
+                            <Col span={16}>
+                                <SliderComponent
+                                    arrImages={[
+                                        slider1,
+                                        slider2,
+                                        slider3,
+                                    ]}
+                                />
+                            </Col>
+                            <Col span={8}>      
+                            <div id="new" style={{flex: 1}}><h4>Tin tức</h4> </div>
+                            </Col>
+                        </Row>
                     <WrapperProducts>
                         {products?.data?.map((product) => {
                             return (

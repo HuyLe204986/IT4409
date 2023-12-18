@@ -217,7 +217,7 @@ const OrderPage = () => {
     return (
         <div style={{ background: '#f5f5fa', with: '100%', height: '100vh' }}>
             <div style={{ height: '100%', width: '1270px', margin: '0 auto' }}>
-                <h3>Giỏ hàng</h3>
+                <h3 style={{padding: '10px 0'}}>Giỏ hàng</h3>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <WrapperLeft>
                         <WrapperStyleHeaderDilivery>
@@ -362,7 +362,7 @@ const OrderPage = () => {
                                         justifyContent: 'space-between',
                                     }}
                                 >
-                                    <span>Tạm tính</span>
+                                    <span>Giá gốc</span>
                                     <span style={{ color: '#000', fontSize: '14px', fontWeight: 'bold' }}>
                                         {convertPrice(priceMemo)}
                                     </span>
@@ -376,7 +376,7 @@ const OrderPage = () => {
                                 >
                                     <span>Giảm giá</span>
                                     <span
-                                        style={{ color: '#000', fontSize: '14px', fontWeight: 'bold' }}
+                                        style={{ color: '#000', fontSize: '14px', fontWeight: 'bold', margin: '6px 0' }}
                                     >{convertPrice(priceDiscountMemo)}</span>
                                 </div>
                                 <div

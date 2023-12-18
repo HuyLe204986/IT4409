@@ -1,7 +1,6 @@
 import React from 'react'
-import { Lable, WrapperInfo, WrapperContainer, WrapperValue, WrapperCountOrder, WrapperItemOrder, WrapperItemOrderInfo } from './style';
+import { Lable, WrapperInfo, WrapperContainer, WrapperValue, WrapperItemOrder, WrapperItemOrderInfo } from './style';
 import Loading from '../../components/LoadingComponent/Loading';
-import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { orderContant } from '../../contant';
 import { convertPrice } from '../../utils';
@@ -14,7 +13,7 @@ const OrderSucess = () => {
     <div style={{background: '#f5f5fa', with: '100%', height: '100vh'}}>
       <Loading isLoading={false}>
         <div style={{height: '100%', width: '1270px', margin: '0 auto'}}>
-          <h3>Đơn hàng đặt thành công</h3>
+          <h3 style={{padding: '10px 0'}}>Đơn hàng đặt thành công</h3>
           <div style={{ display: 'flex', justifyContent: 'center'}}>
             <WrapperContainer>
               <WrapperInfo>
@@ -37,9 +36,9 @@ const OrderSucess = () => {
               <WrapperItemOrderInfo>
                 {state.orders?.map((order) => {
                   return (
-                    <WrapperItemOrder>
+                    <WrapperItemOrder key={order?.name}>
                       <div style={{width: '500px', display: 'flex', alignItems: 'center', gap: 4}}> 
-                        <img src={order.image} style={{width: '77px', height: '79px', objectFit: 'cover'}}/>
+                        <img src={order.image} style={{width: '77px', height: '79px', objectFit: 'cover'}} alt='product-img'/>
                         <div style={{
                           width: 260,
                           overflow: 'hidden',
