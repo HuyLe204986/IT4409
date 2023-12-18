@@ -25,7 +25,7 @@ const MyOrder = () => {
         enabled: !!state?.id && !!state?.token 
     })
     const { isPending: isLoading, data } = queryOrder
-    console.log('order', data);
+    // console.log('order', data);
     useEffect(() => {
         queryOrder.refetch();
     }, [data?.length]);
