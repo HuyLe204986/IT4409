@@ -14,22 +14,22 @@ const userController = {
             if (!email || !password || !confirmPassword) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'Input is required'
+                    message: 'Vui lòng nhập đầy đủ'
                 })
             } else if (!isCheckEmail) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'Email is invalid'
+                    message: 'Email không đúng định dạng'
                 })
             } else if (!isCheckPassword) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'Password is invalid'
+                    message: 'Password không đúng định dạng'
                 })
             } else if (password !== confirmPassword) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'Password is equal confirmPassword'
+                    message: 'Password không giống confirmPassword'
                 })
             }
             const response = await userService.createUser(req.body);
@@ -48,12 +48,12 @@ const userController = {
             if (!email || !password) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'The input is required'
+                    message: 'Vui lòng nhập đầy đủ'
                 })
             } else if (!isCheckEmail) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'The input is email'
+                    message: 'Email không đúng định dạng'
                 })
             }
             const response = await userService.loginUser(req.body);
@@ -77,7 +77,7 @@ const userController = {
             if (!userId) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'userId is requied'
+                    message: 'Id người dùng không đúng'
                 })
             }
 
@@ -96,7 +96,7 @@ const userController = {
             if (!userId) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'userId is requied'
+                    message: 'Id người dùng không đúng'
                 })
             }
 
@@ -125,7 +125,7 @@ const userController = {
             if (!userId) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'userId is requied'
+                    message: 'Id người dùng không đúng'
                 })
             }
             const response = await userService.getDetailUser(req.params.id);
@@ -142,7 +142,7 @@ const userController = {
             if (!token) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'token is requied'
+                    message: 'token không đúng'
                 })
             }
             const response = await jwtService.refreshTokenService(token);
@@ -157,7 +157,7 @@ const userController = {
             res.clearCookie('refresh_token');
             return res.status(200).json({
                 status: 'OK',
-                message: 'Logout success'
+                message: 'Đăng xuất thành công'
             });
         } catch (error) {
             return res.status(404).json({ message: error?.message });
@@ -171,7 +171,7 @@ const userController = {
             if (!ids) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'The ids is required'
+                    message: 'Id người dùng không đúng'
                 })
             }
             const response = await userService.deleteManyUser(ids)

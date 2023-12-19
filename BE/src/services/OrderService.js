@@ -10,10 +10,6 @@ const orderService = {
                     where: { id: order.product, countInStock: { [sequelize.Op.gte]: order.amount }, }
                 })
 
-
-                // const productData = await Product.find({
-                //     where: { id: order.productId, countInStock: { [sequelize.Op.gte]: order.amount }, }
-                // });
                 if (productData) {
                     await Product.update(
                         {
@@ -27,7 +23,7 @@ const orderService = {
 
                     return {
                         status: 'OK',
-                        message: 'CREATE ORDER SUCCESS',
+                        message: 'Tạo sản phẩm thành công',
                     };
                 } else {
                     const product = await Product.findOne({
@@ -49,7 +45,7 @@ const orderService = {
                 })
                 resolve({
                     status: 'ERR',
-                    message: `San pham ${arrId.join(',')} khong du hang`
+                    message: `Sản phẩm ${arrId.join(',')} không đủ hàng`
                 })
             } else {
                 const createdOrder = await Order.create({
@@ -78,11 +74,10 @@ const orderService = {
                 // console.log('OK');
                 resolve({
                     status: 'OK',
-                    message: 'create order success'
+                    message: 'Tạo đơn hàng thành công'
                 })
             }
         } catch (e) {
-            console.log('co loi xay ra');
             reject(e.message)
         }
     }),
@@ -100,7 +95,7 @@ const orderService = {
             if (orders === null) {
                 resolve({
                     status: 'ERR',
-                    message: 'The order is not defined'
+                    message: 'Order không tồn tại'
                 })
             }
             if (orders.length === 0) {
@@ -122,7 +117,7 @@ const orderService = {
                     // console.log('OK');
                     resolve({
                         status: 'OK',
-                        message: 'SUCESSS',
+                        message: 'Lấy tất cả đơn hàng theo người dùng thành công',
                         data: orders
                     })
                 }
@@ -141,7 +136,7 @@ const orderService = {
             if (order === null) {
                 resolve({
                     status: 'ERR',
-                    message: 'The order is not defined'
+                    message: 'Order không tồn tại'
                 })
             }
             const orderItems = await OrderItem.findAll({
@@ -153,7 +148,7 @@ const orderService = {
 
             resolve({
                 status: 'OK',
-                message: 'SUCESSS',
+                message: 'Lấy chi tiết đơn hàng thành công',
                 data: order
             })
         } catch (e) {
@@ -188,7 +183,7 @@ const orderService = {
 
             resolve({
                 status: 'OK',
-                message: 'success',
+                message: 'Hủy đơn hàng thành công',
             })
         } catch (e) {
             reject(e)
@@ -219,7 +214,7 @@ const orderService = {
                 if (index + 1 == orders.length) {
                     resolve({
                         status: 'OK',
-                        message: 'SUCESSS',
+                        message: 'Lấy tất cả đơn hàng thành công',
                         data: orders
                     })
                 }
@@ -232,23 +227,22 @@ const orderService = {
 
     updateOrder: (orderId, isPaid, isDelivered) => new Promise(async (resolve, reject) => {
         try {
-            const order = await Order.findOne({where: {id: orderId}})
+            const order = await Order.findOne({ where: { id: orderId } })
             if (order === null) {
                 resolve({
                     status: 'ERR',
-                    message: 'Order is not defined'
+                    message: 'Order không tồn tại'
                 })
             }
 
-            await Order.update({isPaid, isDelivered},{ where: {id: orderId}});
+            await Order.update({ isPaid, isDelivered }, { where: { id: orderId } });
 
-            const updatedOrder = await Order.findOne({where: {id: orderId}});
+            const updatedOrder = await Order.findOne({ where: { id: orderId } });
 
-            console.log('huyhuy333', orderId, updatedOrder);
 
             resolve({
                 status: 'OK',
-                message: 'SUCCESS',
+                message: 'Cập nhật đơn hàng thành công',
                 data: updatedOrder
             })
         } catch (e) {

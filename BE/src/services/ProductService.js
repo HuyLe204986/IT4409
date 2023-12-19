@@ -15,7 +15,7 @@ const productService = {
             if (product !== null) {
                 resolve({
                     status: 'ERR',
-                    message: 'Name of product is already'
+                    message: 'Tên của sản phẩm đã tồn tại'
                 })
             }
             const newProduct = await Product.create({
@@ -32,7 +32,7 @@ const productService = {
             if (newProduct) {
                 resolve({
                     status: 'OK',
-                    message: 'SUCCESS',
+                    message: 'Thêm sản phẩm thành công',
                     data: newProduct
                 })
             }
@@ -47,7 +47,7 @@ const productService = {
             if (product === null) {
                 resolve({
                     status: 'ERR',
-                    message: 'Product is not defined'
+                    message: 'Sản phẩm không tồn tại'
                 })
             }
 
@@ -59,7 +59,7 @@ const productService = {
 
             resolve({
                 status: 'OK',
-                message: 'SUCCESS',
+                message: 'Sửa sản phẩm thành công',
                 data: updatedProduct
             })
         } catch (error) {
@@ -73,13 +73,13 @@ const productService = {
             if (product === null) {
                 resolve({
                     status: 'ERR',
-                    message: 'Product is not defined'
+                    message: 'Sản phẩm không tồn tại'
                 })
             }
 
             resolve({
                 status: 'OK',
-                message: 'SUCESS',
+                message: 'Lấy chi tiết sản phẩm thành công',
                 data: product
             })
         } catch (e) {
@@ -93,14 +93,14 @@ const productService = {
             if (product === null) {
                 resolve({
                     status: 'ERR',
-                    message: 'Product is not defined'
+                    message: 'Sản phẩm không tồn tại'
                 })
             }
 
             await Product.destroy({ where: { id: id } });
             resolve({
                 status: 'OK',
-                message: 'Delete product success',
+                message: 'Xóa sản phẩm thành công',
             })
         } catch (e) {
             reject(e)
@@ -132,7 +132,7 @@ const productService = {
 
             resolve({
                 status: 'OK',
-                message: 'Success',
+                message: 'Lấy sản phẩm thành công',
                 data: allProduct,
                 total: totalProduct,
                 pageCurrent: Number(page + 1),
@@ -148,7 +148,7 @@ const productService = {
             await Product.destroy({ where: { id: ids } });
             resolve({
                 status: 'OK',
-                message: 'Delete products success',
+                message: 'Xóa nhiều sản phẩm thành công',
             })
         } catch (e) {
             reject(e)
@@ -163,7 +163,7 @@ const productService = {
 
             resolve({
                 status: 'OK',
-                message: 'Success',
+                message: 'Lấy tất cả loại sản phẩm thành công',
                 data: types,
             })
         } catch (e) {
