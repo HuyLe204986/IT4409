@@ -19,13 +19,20 @@ const TypeProductPage = () => {
         limit: 10,
         total: 1,
     });
+
+    const [sort, setSort] = useState('');
+    const [star, setStar] = useState(null);
+    const [price, setPrice] = useState(null);
+    const [originalProducts, setOriginalProducts] = useState([]);
+
     const { state } = useLocation();
     const fetchProductType = async (type, page, limit) => {
         setLoading(true);
         const res = await productService.getProductType(type, page, limit);
-        if (res?.status == 'OK') {
+        if (res?.status === 'OK') {
             setLoading(false);
             setProducts(res?.data);
+            setOriginalProducts(res?.data); // lưu lại bản sao products
             setPanigate({ ...panigate, total: res?.totalPage });
         } else {
             setLoading(false);
@@ -39,13 +46,73 @@ const TypeProductPage = () => {
     const onChange = (current, pageSize) => {
         setPanigate({ ...panigate, page: current - 1, limit: pageSize });
     };
+
+    const filterProducts = (sortCriteria, starCriteria, priceCriteria) => {
+        let filteredProducts = [...originalProducts];
+
+        if (sortCriteria === 'asc') {
+            filteredProducts.sort((a, b) => a.price - b.price);
+        } else if (sortCriteria === 'desc') {
+            filteredProducts.sort((a, b) => b.price - a.price);
+        }
+
+        if (starCriteria) {
+            filteredProducts = filteredProducts.filter((product) => product.rating >= Number(starCriteria));
+        }
+
+        if (priceCriteria) {
+            switch (priceCriteria) {
+                case 1:
+                    filteredProducts = filteredProducts.filter((product) => product.price * (100 - product.discount) / 100 < 2000000);
+                    break;
+                case 2:
+                    filteredProducts = filteredProducts.filter((product) => product.price * (100 - product.discount) / 100 > 2000000 && product.price * (100 - product.discount) / 100 < 5000000);
+                    break;
+                case 3:
+                    filteredProducts = filteredProducts.filter((product) => product.price * (100 - product.discount) / 100 > 5000000 && product.price * (100 - product.discount) / 100 < 20000000);
+                    break;
+                case 4:
+                    filteredProducts = filteredProducts.filter((product) => product.price * (100 - product.discount) / 100 > 20000000);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        setProducts(filteredProducts);
+    };
+
+    const handleOnChangeSort = (itemSelected) => {
+        filterProducts(itemSelected, star, price);
+        setSort(itemSelected);
+    };
+
+    const handleOnChangeStar = (itemSelected) => {
+        filterProducts(sort, itemSelected, price);
+        setStar(itemSelected);
+    };
+
+    const handleOnChangePrice = (itemSelected) => {
+        filterProducts(sort, star, itemSelected);
+        setPrice(itemSelected);
+    };
+
+    const handleRemoveOption = (isRemoveOption) =>  {
+        if (isRemoveOption) setProducts(originalProducts)
+    }
+
     return (
         <Loading isLoading={loading}>
             <div style={{ width: '100%', background: '#efefef', height: 'calc(100vh - 64px)' }}>
                 <div style={{ width: '1270px', margin: '0 auto', height: '100%' }}>
                     <Row style={{ flexWrap: 'nowrap', paddingTop: '10px', height: 'calc(100% - 20px)' }}>
                         <WrapperNavbar span={4}>
-                            <NavbarComponent />
+                            <NavbarComponent 
+                                onChangeSort = {handleOnChangeSort}
+                                onChangeStar = {handleOnChangeStar}
+                                onChangePrice = {handleOnChangePrice}
+                                onRemoveOption = {handleRemoveOption}
+                            />
                         </WrapperNavbar>
                         <Col
                             span={20}
