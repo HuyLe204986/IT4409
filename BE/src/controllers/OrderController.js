@@ -6,7 +6,7 @@ const orderController = {
             if (!paymentMethod || !itemsPrice || !shippingPrice || !totalPrice || !fullName || !address || !city || !phone) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'The input is required'
+                    message: 'Vui lòng nhập đầy đủ thông tin'
                 })
             }
             const response = await OrderService.createOrder(req.body)
@@ -21,7 +21,7 @@ const orderController = {
             if (!userId) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'The userId is required'
+                    message: 'Id người dùng không đúng'
                 })
             }
             const response = await OrderService.getAllOrderDetails(userId)
@@ -36,7 +36,7 @@ const orderController = {
             if (!orderId) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'The userId is required'
+                    message: 'Id người dùng không đúng'
                 })
             }
             const response = await OrderService.getOrderDetails(orderId)
@@ -53,7 +53,7 @@ const orderController = {
             if (!orderId) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'The orderId is required'
+                    message: 'Id đơn hàng không đúng'
                 })
             }
             const response = await OrderService.cancelOrderDetails(orderId, data)

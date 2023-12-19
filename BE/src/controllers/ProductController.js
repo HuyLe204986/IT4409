@@ -7,7 +7,7 @@ const productController = {
             if (!name || !image || !type || !countInStock || !price || !rating) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'Input is required'
+                    message: 'Vui lòng nhập đầy đủ thông tin'
                 })
             }
             const response = await ProductService.createProduct(req.body)
@@ -24,7 +24,7 @@ const productController = {
             if (!productId) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'ProductId is required'
+                    message: 'Id sản phẩm không tồn tại'
                 })
             }
             const response = await ProductService.updateProduct(productId, data)
@@ -39,7 +39,7 @@ const productController = {
             if (!productId) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'ProductId is required'
+                    message: 'Id sản phẩm không đúng'
                 })
             }
             const response = await ProductService.getDetailsProduct(productId)
@@ -54,7 +54,7 @@ const productController = {
             if (!productId) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'ProductId is required'
+                    message: 'Id sản phẩm không đúng'
                 })
             }
             const response = await ProductService.deleteProduct(productId)
@@ -78,7 +78,7 @@ const productController = {
             if (!ids) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'The ids is required'
+                    message: 'Id sản phẩm không đúng'
                 })
             }
             const response = await ProductService.deleteManyProduct(ids)

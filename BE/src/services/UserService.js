@@ -11,7 +11,7 @@ const userService = {
             console.log(user)
             if (user) return resolve({
                 status: 'ERR',
-                message: 'Email is exit'
+                message: 'Email đã tồn tại'
             });
 
             const hash = bcrypt.hashSync(password, 10)
@@ -22,7 +22,7 @@ const userService = {
             })
             resolve({
                 status: 'OK',
-                message: 'CREATE SUCCESS ',
+                message: 'Tạo người dùng thành công',
                 data
             })
         } catch (error) {
@@ -36,14 +36,14 @@ const userService = {
             const user = await User.findOne({ where: { email } });
             if (user === null) return resolve({
                 status: 'ERR',
-                message: 'Email is not exit'
+                message: 'Tài khoản không tồn tại'
             });
 
             const comparePassword = bcrypt.compareSync(password, user.password)
 
             if (!comparePassword) return resolve({
                 status: 'ERR',
-                message: 'Password is not correct'
+                message: 'Password không đúng'
             });
 
 
@@ -61,7 +61,7 @@ const userService = {
 
             resolve({
                 status: 'OK',
-                message: 'SUCCESS',
+                message: 'Đặng nhập thành công',
                 access_token,
                 refresh_token
             })
@@ -73,14 +73,13 @@ const userService = {
 
     updateUser: (id, data) => new Promise(async (resolve, reject) => {
         try {
-            console.log('cap nhat ', id);
             const user = await User.findOne({ where: { id: id } });
-            if(!data.email) {
+            if (!data.email) {
                 data.email = user.email;
             }
             if (user === null) return resolve({
                 status: 'ERR',
-                message: 'User is not exit'
+                message: 'Người dùng không tồn tại'
             })
 
             const checkEmail = await User.findOne({ where: { email: data.email } });
@@ -88,7 +87,7 @@ const userService = {
             if (checkEmail != null && checkEmail.id != user.id) {
                 resolve({
                     status: 'ERR',
-                    message: 'Email is already use'
+                    message: 'Email đã tồn tại'
                 })
             }
 
@@ -96,14 +95,12 @@ const userService = {
                 const password = data.password;
                 data.password = bcrypt.hashSync(password, 10)
             }
-            console.log('data nhan duoc', data);
             await User.update(data, { where: { id: id } });
 
             const updatedUser = await User.findOne({ where: { id } });
-            console.log('udpate thanh cong', updatedUser);
             resolve({
                 status: 'OK',
-                message: 'SUCCESS',
+                message: 'Cập nhật người dùng thành công',
                 data: updatedUser
             })
 
@@ -117,14 +114,14 @@ const userService = {
             const user = await User.findOne({ where: { id: id } });
             if (user === null) return resolve({
                 status: 'ERR',
-                message: 'Email is already use'
+                message: 'Người dùng không tồn tại'
             })
 
             const deletedUser = await User.destroy({ where: { id: id } });
 
             resolve({
                 status: 'OK',
-                message: 'DELETE SUCCESS',
+                message: 'Xóa người dùng thành công',
                 deletedUser
             })
 
@@ -137,7 +134,7 @@ const userService = {
             await User.destroy({ where: { id: ids } });
             resolve({
                 status: 'OK',
-                message: 'Delete users success',
+                message: 'Xóa nhiều người dùng thành công',
             })
 
         } catch (error) {
@@ -151,7 +148,7 @@ const userService = {
                 const allUsers = await User.findAll();
                 resolve({
                     status: 'OK',
-                    message: 'GET ALL SUCCESS',
+                    message: 'Lấy tất cả người dùng thành công',
                     data: allUsers
                 })
 
@@ -169,13 +166,13 @@ const userService = {
                 if (user === null) {
                     resolve({
                         status: 'ERR',
-                        message: 'User is not exist'
+                        message: 'Người dùng không tồn tại'
                     })
                 }
 
                 resolve({
                     status: 'OK',
-                    message: 'GET USER SUCCESS',
+                    message: 'Lấy thông tin người dùng thành công',
                     data: user
                 })
 

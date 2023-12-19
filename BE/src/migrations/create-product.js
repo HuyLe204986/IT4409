@@ -36,7 +36,7 @@ module.exports = {
         allowNull: false
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       discount: {
         type: Sequelize.FLOAT
