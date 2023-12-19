@@ -339,6 +339,27 @@ const AdminProduct = () => {
             dataIndex: 'type',
         },
         {
+            title: 'Count in Stock',
+            dataIndex: 'countInStock',
+            sorter: (a, b) => a.countInStock - b.countInStock,
+            filters: [
+                {
+                    text: '>=3',
+                    value: '>=',
+                },
+                {
+                    text: '<=3',
+                    value: '<=',
+                },
+            ],
+            onFilter: (value, record) => {
+                if (value === '>=') {
+                    return Number(record.countInStock) >= 3;
+                }
+                return Number(record.countInStock) <= 3;
+            },
+        },
+        {
             title: 'Action',
             dataIndex: 'action',
             render: renderAction,

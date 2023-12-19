@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 import * as orderService from '../../services/OrderService'
 import Loading from '../../components/LoadingComponent/Loading';
-import { WrapperContainer, WrapperFooterItem, WrapperHeaderItem, WrapperItemOrder, WrapperListOrder, WrapperStatus } from './style';
+import { WrapperContainer, WrapperFooterItem, WrapperHeaderItem, WrapperItemOrder, WrapperListOrder, WrapperStatus, WrapperHeader} from './style';
 import { convertPrice } from '../../utils';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -93,28 +93,28 @@ const MyOrder = () => {
         <Loading isLoading={isLoading || isLoadingCancel}>
             <WrapperContainer>
                 <div style={{height: '100%', width: '1270px', margin: '0 auto'}}>
-                    <h4>Đơn hàng của tôi</h4>
+                    <WrapperHeader style={{padding: '10px 0'}}>Đơn hàng của tôi</WrapperHeader>
                     <WrapperListOrder>
                         { Array.isArray(data) && data?.map((order) => {
                         return (
                             <WrapperItemOrder key={order?.id}>
                             <WrapperStatus>
-                                <span style={{fontSize: '14px', fontWeight: 'bold'}}>Trạng thái</span>
-                                <div>
+                                <span style={{fontSize: '20px', fontWeight: 'bold', padding: '5px 0px'}}>Trạng thái</span>
+                                <div style={{padding: '5px 0px'}}>
                                     <span style={{color: 'rgb(255, 66, 78)'}}>Giao hàng: </span>
                                     <span style={{color: 'rgb(90, 32, 193)', fontWeight: 'bold'}}>{`${order.isDelivered ? 'Đã giao hàng': 'Chưa giao hàng'}`}</span>
                                 </div>
-                                <div>
-                                    <span style={{color: 'rgb(255, 66, 78)'}}>Thanh toán:</span>
+                                <div style={{padding: '5px 0px'}}>
+                                    <span style={{color: 'rgb(255, 66, 78)'}}>Thanh toán: </span>
                                     <span style={{color: 'rgb(90, 32, 193)', fontWeight: 'bold'}}>{`${order.isPaid ? 'Đã thanh toán': 'Chưa thanh toán'}`}</span>
                                 </div>
                             </WrapperStatus>
                             {renderProduct(order?.orderItems)}
                             <WrapperFooterItem>
                                 <div>
-                                <span style={{color: 'rgb(255, 66, 78)'}}>Tổng tiền: </span>
+                                <span style={{color: 'rgb(255, 66, 78)', fontSize: '20px'}}>Tổng tiền: </span>
                                 <span 
-                                    style={{ fontSize: '13px', color: 'rgb(56, 56, 61)',fontWeight: 700 }}
+                                    style={{ fontSize: '13px', color: 'rgb(56, 56, 61)',fontWeight: 700, fontSize: '20px'}}
                                 >{convertPrice(order?.totalPrice)}</span>
                                 </div>
                                 <div style={{display: 'flex', gap: '10px'}}>

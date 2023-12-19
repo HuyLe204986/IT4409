@@ -81,3 +81,8 @@ export const WrapperStatus = styled.div`
   border-bottom: 1px solid rgb(235, 235, 240);
   flex-direction:column;
 `
+export const WrapperHeader = styled.h1`
+    color: #000;
+    font-size: 18px;
+    margin: 4px 0;
+`
