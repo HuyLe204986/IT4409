@@ -11,7 +11,6 @@ import { useDebounce } from '../../hooks/useDebounce'
 import * as productService from '../../services/ProductService';
 import { useQuery } from '@tanstack/react-query'
 import Loading from '../../components/LoadingComponent/Loading'
-import Footer from '../../components/FooterComponent/FooterComponent'
 import { Col, Row } from 'antd'
 const HomePage = () => {
   const searchProduct = useSelector((state) => state?.product?.search)
@@ -115,4 +114,4 @@ const HomePage = () => {
     );
 }
 
-export default HomePage 
+export default HomePage
