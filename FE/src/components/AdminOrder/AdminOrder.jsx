@@ -21,6 +21,7 @@ const AdminOrder = () => {
   })
   const [rowSelected, setRowSelected] = useState('');
   const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
+  const [isSendingData, setIsSendingData] = useState(false);
   const [stateOrderDetails, setStateOrderDetails] = useState(initial);
 
   // call API
@@ -71,6 +72,7 @@ const AdminOrder = () => {
         ...stateOrderDetails,
         [e.name]: value,
     });
+    setIsSendingData(true);
   };
 
   
@@ -235,7 +237,10 @@ const AdminOrder = () => {
   }, [isSuccessUpdated]);
 
   useEffect(() => {
-    onUpdateOrder();
+    if (isSendingData){
+      onUpdateOrder();
+      setIsSendingData(false);
+    }
   }, [stateOrderDetails]);
 
   return (
