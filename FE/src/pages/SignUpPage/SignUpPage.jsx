@@ -70,7 +70,7 @@ const SignUpPage = () => {
             <div style={{ display: 'flex', width: '800px', height: '445px', borderRadius: '6px', background: '#fff' }}>
                 <WrapperContainerLeft>
                     <h1>WELCOME TO MY SHOP </h1>
-                    <p>Vui lòng <span style={{color:'green'}}>Đ𝐚̆𝐧𝐠 𝐍𝐡𝐚̣̂𝐩</span> hoặc <span style={{color:'green'}}>𝐓𝐚̣𝐨 𝐓𝐚̀𝐢 𝐊𝐡𝐨𝐚̉𝐧</span> </p>
+                    <p>Vui lòng điền thông tin đầy đủ</p>
                     <InputForm style={{marginBottom: '10px'}} placeholder="abc@gmail.com" value={email} onChange={handleOnChangeEmail}/>
                     <div style={{ position: 'relative' }}>
                         <span
@@ -124,7 +124,7 @@ const SignUpPage = () => {
                             onClick={handleSignUp}
                             size={40}
                             styleButton={{
-                                background: 'green',
+                                background: 'rgb(255, 57, 69)',
                                 height: '48px',
                                 width: '100%',
                                 border: 'none',
@@ -132,7 +132,7 @@ const SignUpPage = () => {
                                 margin: '26px 0 10px',
                             }}
                             textButton={'Đăng ký'}
-                            styleTextButton={{ color: '#d9d9d9', fontSize: '15px', fontWeight: '700' }}
+                            styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </Loading>
                     <p>Bạn đã có tài khoản? <WrapperTextLight onClick={handleNavigateSignIn}>Đăng nhập</WrapperTextLight></p>

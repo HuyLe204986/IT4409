@@ -2,9 +2,16 @@ import React, { useEffect, useState } from 'react'
 import SliderComponent from '../../components/SliderComponent/SliderComponent'
 import TypeProduct from '../../components/TypeProduct/TypeProduct'
 import { WrapperButtonMore, WrapperProducts, WrapperTypeProduct,TextName } from './style'
-import slider1 from '../../assets/images/slider1.webp'
-import slider2 from '../../assets/images/slider2.webp'
-import slider3 from '../../assets/images/slider3.webp'
+import slider1 from '../../assets/images/slider1.png';
+import slider2 from '../../assets/images/slider2.jpg';
+import slider3 from '../../assets/images/slider3.jpg';
+import slider4 from '../../assets/images/slider4.jpg';
+import slider5 from '../../assets/images/slider5.jpg';
+import slider6 from '../../assets/images/slider6.png';
+import slider7 from '../../assets/images/slider7.jpg';
+import slider8 from '../../assets/images/slider8.png';
+import slider9 from '../../assets/images/slider9.png';
+import slider10 from '../../assets/images/slider10.jpg';
 import ad from '../../assets/images/ad.jpg'
 import CardComponent from '../../components/CardComponent/CardComponent'
 import { useSelector } from 'react-redux'
@@ -21,7 +28,7 @@ const HomePage = () => {
     const [loading, setLoading] = useState(false)
     const [typeProducts, setTypeProducts] = useState([])
 
-    const fetchProductAll = async (context) => {
+    const fetchProductAll = async (context) => { // mảng chứa queryKey
         const limit = context?.queryKey && context?.queryKey[1]
         const search = context?.queryKey && context?.queryKey[2]
         const res = await productService.getAllProduct(search, limit);
@@ -68,6 +75,13 @@ const HomePage = () => {
                                     slider1,
                                     slider2,
                                     slider3,
+                                    slider4,
+                                    slider5,
+                                    slider6,
+                                    slider7,
+                                    slider8,
+                                    slider9,
+                                    slider10,
                                 ]}
                             />
                         </Col>
