@@ -73,6 +73,7 @@ const HomePage = () => {
                         </Col>
                         <Col span={8}>      
                             <div style={{flex: 1}}><Image height={274} src= {ad}/> </div>
+
                         </Col>
                     </Row>
                     <WrapperProducts>
