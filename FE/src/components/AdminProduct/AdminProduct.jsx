@@ -13,7 +13,6 @@ import { useQuery } from '@tanstack/react-query';
 import DrawerComponent from '../DrawerComponent/DrawerComponent';
 import { useSelector } from 'react-redux';
 import ModalComponent from '../ModalComponent/ModalComponent';
-import FormItem from 'antd/es/form/FormItem';
 const AdminProduct = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [rowSelected, setRowSelected] = useState('');
@@ -44,14 +43,14 @@ const AdminProduct = () => {
     const renderAction = () => {
         return (
             <div>
-                <DeleteOutlined
-                    style={{ color: 'red', fontSize: '24px', cursor: 'pointer' }}
+                <Button
+                    style={{color: 'white', cursor: 'pointer', backgroundColor:'#d9534f' }}
                     onClick={() => setIsModalOpenDelete(true)}
-                />
-                <EditOutlined
-                    style={{ color: 'orange', fontSize: '24px', cursor: 'pointer' }}
+                ><DeleteOutlined />Xóa</Button>
+                <Button
+                    style={{color: 'white',cursor: 'pointer', float:'right',backgroundColor: '#5bc0de'}}
                     onClick={handleDetailsProduct}
-                />
+                ><EditOutlined />Sửa</Button>
             </div>
         );
     };
@@ -278,7 +277,7 @@ const AdminProduct = () => {
 
     const columns = [
         {
-            title: 'Name',
+            title: 'Tên sản phẩm',
             dataIndex: 'name',
             // render: (text) => <a>{text}</a>,
             ellipsis: {
@@ -293,7 +292,7 @@ const AdminProduct = () => {
             ...getColumnSearchProps('name'),
         },
         {
-            title: 'Price',
+            title: 'Giá tiền (VND)',
             dataIndex: 'price',
             sorter: (a, b) => a.price - b.price,
             filters: [
@@ -314,7 +313,7 @@ const AdminProduct = () => {
             },
         },
         {
-            title: 'Rating',
+            title: 'Đánh giá',
             dataIndex: 'rating',
             sorter: (a, b) => a.rating - b.rating,
             filters: [
@@ -335,11 +334,11 @@ const AdminProduct = () => {
             },
         },
         {
-            title: 'Type',
+            title: 'Loại sản phẩm',
             dataIndex: 'type',
         },
         {
-            title: 'Count in Stock',
+            title: 'Số lượng hàng trong kho',
             dataIndex: 'countInStock',
             sorter: (a, b) => a.countInStock - b.countInStock,
             filters: [
@@ -360,7 +359,7 @@ const AdminProduct = () => {
             },
         },
         {
-            title: 'Action',
+            title: 'Thao tác',
             dataIndex: 'action',
             render: renderAction,
         },
@@ -532,10 +531,11 @@ const AdminProduct = () => {
             <WrapperHeader>Quản lý sản phẩm</WrapperHeader>
             <div style={{ marginTop: '10px' }}>
                 <Button
-                    style={{ height: '150px', width: '150px', borderRadius: '6px', borderStyle: 'dashed' }}
+                    style={{borderRadius: '6px', backgroundColor: '#0275d8', color: 'white'}}
                     onClick={() => setIsModalOpen(true)}
                 >
-                    <PlusOutlined style={{ fontSize: '60px' }} />
+                    {/* <PlusOutlined style={{ fontSize: '60px' }} /> */}
+                    <PlusOutlined /> Thêm mới sản phẩm 
                 </Button>
             </div>
             <div style={{ marginTop: '20px' }}>
@@ -571,12 +571,12 @@ const AdminProduct = () => {
                         form={form}
                     >
                         <Form.Item
-                            label="Name"
+                            label="Tên sản phẩm"
                             name="name"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your name!',
+                                    message: 'Vui lòng nhập tên sản phẩm!',
                                 },
                             ]}
                         >
@@ -584,12 +584,12 @@ const AdminProduct = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Type"
+                            label="Loại sản phẩm"
                             name="type"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your type!',
+                                    message: 'Vui lòng nhập loại sản phẩm!',
                                 },
                             ]}
                         >
@@ -602,21 +602,21 @@ const AdminProduct = () => {
                         </Form.Item>
                         {stateProduct.type === 'add_type' && (
                             <Form.Item
-                                label="New type"
+                                label="Loại mới"
                                 name="newType"
-                                rules={[{ required: true, message: 'Please input your type!' }]}
+                                rules={[{ required: true, message: 'Vui lòng nhập loại sản phẩm!' }]}
                             >
                                 <InputComponent value={stateProduct.newType} onChange={handleOnChange} name="newType" />
                             </Form.Item>
                         )}
 
                         <Form.Item
-                            label="Count InStock"
+                            label="Số lượng"
                             name="countInStock"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your count in stock!',
+                                    message: 'Vui lòng nhập số lượng!',
                                 },
                             ]}
                         >
@@ -627,12 +627,12 @@ const AdminProduct = () => {
                             />
                         </Form.Item>
                         <Form.Item
-                            label="Price"
+                            label="Giá tiền"
                             name="price"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your price !',
+                                    message: 'Vui lòng nhập giá tiền!',
                                 },
                             ]}
                         >
@@ -640,12 +640,12 @@ const AdminProduct = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Description"
+                            label="Mô tả"
                             name="description"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your description !',
+                                    message: 'Vui lòng nhập mô tả!',
                                 },
                             ]}
                         >
@@ -657,12 +657,12 @@ const AdminProduct = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Rating"
+                            label="Đánh giá"
                             name="rating"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your rating !',
+                                    message: 'Vui lòng nhập đánh giá!',
                                 },
                             ]}
                         >
@@ -670,25 +670,25 @@ const AdminProduct = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Discount"
+                            label="Giảm giá"
                             name="discount"
-                            rules={[{ required: true, message: 'Please input your discount of product!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập giảm giá!' }]}
                         >
                             <InputComponent value={stateProduct.discount} onChange={handleOnChange} name="discount" />
                         </Form.Item>
 
                         <Form.Item
-                            label="Image"
+                            label="Hình ảnh"
                             name="image"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your image !',
+                                    message: 'Vui lòng chọn ảnh!',
                                 },
                             ]}
                         >
                             <WrapperUploadFile onChange={handleOnChangeAvatar} maxCount={1}>
-                                <Button>Select File</Button>
+                                <Button>Chọn File</Button>
                                 {stateProduct?.image && (
                                     <img
                                         src={stateProduct?.image}
@@ -712,7 +712,7 @@ const AdminProduct = () => {
                             }}
                         >
                             <Button type="primary" htmlType="submit">
-                                Submit
+                                Xác nhận
                             </Button>
                         </Form.Item>
                     </Form>
@@ -739,12 +739,12 @@ const AdminProduct = () => {
                         form={form}
                     >
                         <Form.Item
-                            label="Name"
+                            label="Tên sản phẩm"
                             name="name"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your name!',
+                                    message: 'Vui lòng nhập tên sản phẩm!',
                                 },
                             ]}
                         >
@@ -756,12 +756,12 @@ const AdminProduct = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Type"
+                            label="Loại sản phẩm"
                             name="type"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your type!',
+                                    message: 'Vui lòng nhập loại sản phẩm!',
                                 },
                             ]}
                         >
@@ -773,12 +773,12 @@ const AdminProduct = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Count InStock"
+                            label="Số lượng"
                             name="countInStock"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your count in stock!',
+                                    message: 'Vui lòng nhập số lượng!',
                                 },
                             ]}
                         >
@@ -789,12 +789,12 @@ const AdminProduct = () => {
                             />
                         </Form.Item>
                         <Form.Item
-                            label="Price"
+                            label="Giá tiền"
                             name="price"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your price !',
+                                    message: 'Vui lòng nhập giá tiền!',
                                 },
                             ]}
                         >
@@ -806,12 +806,12 @@ const AdminProduct = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Description"
+                            label="Mô tả"
                             name="description"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your description !',
+                                    message: 'Vui lòng nhập mô tả sản phẩm!',
                                 },
                             ]}
                         >
@@ -823,12 +823,12 @@ const AdminProduct = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Rating"
+                            label="Đánh giá"
                             name="rating"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your rating !',
+                                    message: 'Vui lòng nhập đánh giá!',
                                 },
                             ]}
                         >
@@ -840,9 +840,9 @@ const AdminProduct = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Discount"
+                            label="Giảm giá"
                             name="discount"
-                            rules={[{ required: true, message: 'Please input your discount of product!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập giảm giá!' }]}
                         >
                             <InputComponent
                                 value={stateProductDetails.discount}
@@ -852,17 +852,17 @@ const AdminProduct = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Image"
+                            label="Hình ảnh"
                             name="image"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your image !',
+                                    message: 'Vui lòng chọn ảnh!',
                                 },
                             ]}
                         >
                             <WrapperUploadFile onChange={handleOnChangeAvatarDetails} maxCount={1}>
-                                <Button>Select File</Button>
+                                <Button>Chọn File</Button>
                                 {stateProductDetails?.image && (
                                     <img
                                         src={stateProductDetails?.image}
@@ -886,7 +886,7 @@ const AdminProduct = () => {
                             }}
                         >
                             <Button type="primary" htmlType="submit">
-                                Apply
+                                Xác nhận
                             </Button>
                         </Form.Item>
                     </Form>

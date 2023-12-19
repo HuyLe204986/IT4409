@@ -241,7 +241,7 @@ const PaymentPage = () => {
       <Loading isLoading={isLoadingAddOrder}
         >
         <div style={{height: '100%', width: '1270px', margin: '0 auto'}}>
-          <h3>Thanh toán</h3>
+          <h1 style={{padding: '10px 0'}}>Thanh toán</h1>
           <div style={{ display: 'flex', justifyContent: 'center'}}>
             <WrapperLeft>
               <WrapperInfo>
@@ -388,31 +388,31 @@ const PaymentPage = () => {
               form={form}
             >
               <Form.Item
-                label="Name"
+                label="Tên"
                 name="name"
-                rules={[{ required: true, message: 'Please input your name!' }]}
+                rules={[{ required: true, message: 'Vui lòng nhập tên!' }]}
               >
                 <InputComponent value={stateUserDetails['name']} onChange={handleOnchangeDetails} name="name" />
               </Form.Item>
               <Form.Item
-                label="City"
+                label="TP"
                 name="city"
-                rules={[{ required: true, message: 'Please input your city!' }]}
+                rules={[{ required: true, message: 'Voi lòng nhập thành phố!' }]}
               >
                 <InputComponent value={stateUserDetails['city']} onChange={handleOnchangeDetails} name="city" />
               </Form.Item>
               <Form.Item
-                label="Phone"
+                label="Điện thoại"
                 name="phone"
-                rules={[{ required: true, message: 'Please input your  phone!' }]}
+                rules={[{ required: true, message: 'Vui lòng nhập số điện thoại!' }]}
               >
                 <InputComponent value={stateUserDetails.phone} onChange={handleOnchangeDetails} name="phone" />
               </Form.Item>
 
               <Form.Item
-                label="Adress"
+                label="Địa chỉ"
                 name="address"
-                rules={[{ required: true, message: 'Please input your  address!' }]}
+                rules={[{ required: true, message: 'Vui lòng nhập địa chỉ!' }]}
               >
                 <InputComponent value={stateUserDetails.address} onChange={handleOnchangeDetails} name="address" />
               </Form.Item>

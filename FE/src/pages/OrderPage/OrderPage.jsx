@@ -458,9 +458,9 @@ const OrderPage = () => {
                         form={form}
                     >
                         <Form.Item
-                            label="Name"
+                            label="Tên"
                             name="name"
-                            rules={[{ required: true, message: 'Please input your name!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập tên!' }]}
                         >
                             <InputComponent
                                 value={stateUserDetails['name']}
@@ -469,9 +469,9 @@ const OrderPage = () => {
                             />
                         </Form.Item>
                         <Form.Item
-                            label="City"
+                            label="TP"
                             name="city"
-                            rules={[{ required: true, message: 'Please input your city!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập thành phố!' }]}
                         >
                             <InputComponent
                                 value={stateUserDetails['city']}
@@ -480,9 +480,9 @@ const OrderPage = () => {
                             />
                         </Form.Item>
                         <Form.Item
-                            label="Phone"
+                            label="Điện thoại"
                             name="phone"
-                            rules={[{ required: true, message: 'Please input your  phone!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập số điện thoại!' }]}
                         >
                             <InputComponent
                                 value={stateUserDetails.phone}
@@ -492,9 +492,9 @@ const OrderPage = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Address"
+                            label="Địa chỉ"
                             name="address"
-                            rules={[{ required: true, message: 'Please input your  address!' }]}
+                            rules={[{ required: true, message: 'Vui lòng nhập địa chỉ!' }]}
                         >
                             <InputComponent
                                 value={stateUserDetails.address}

@@ -141,43 +141,43 @@ const AdminOrder = () => {
 
   const columns = [
     {
-      title: 'User name',
+      title: 'Tên',
       dataIndex: 'userName',
       sorter: (a, b) => a.userName.length - b.userName.length,
       ...getColumnSearchProps('userName')
     },
     {
-      title: 'Phone',
+      title: 'Số điện thoại',
       dataIndex: 'phone',
       sorter: (a, b) => a.phone.length - b.phone.length,
       ...getColumnSearchProps('phone')
     },
     {
-      title: 'Address',
+      title: 'Địa chỉ',
       dataIndex: 'address',
       sorter: (a, b) => a.address.length - b.address.length,
       ...getColumnSearchProps('address')
     },
     {
-      title: 'Paid',
+      title: 'Tình trạng thanh toán',
       dataIndex: 'isPaid',
       sorter: (a, b) => a.isPaid.length - b.isPaid.length,
       ...getColumnSearchProps('isPaid')
     },
     {
-      title: 'Delivered',
+      title: 'Tình trạng giao hàng',
       dataIndex: 'isDelivered',
       sorter: (a, b) => a.isDelivered.length - b.isDelivered.length,
       ...getColumnSearchProps('isDelivered')
     },
     {
-      title: 'Payment method',
+      title: 'Phương thức thanh toán',
       dataIndex: 'paymentMethod',
       sorter: (a, b) => a.paymentMethod.length - b.paymentMethod.length,
       ...getColumnSearchProps('paymentMethod')
     },
     {
-      title: 'Total price',
+      title: 'Tổng giá tiền',
       dataIndex: 'totalPrice',
       sorter: (a, b) => a.totalPrice.length - b.totalPrice.length,
       ...getColumnSearchProps('totalPrice')
@@ -199,11 +199,11 @@ const AdminOrder = () => {
           options= {[
           {
           value: true,
-          label: "True"
+          label: "Đã thanh toán"
           },
           {
           value: false,
-          label: "False"
+          label: "Chưa thanh toán"
           }
         ]}
       name="isPaid"
@@ -216,11 +216,11 @@ const AdminOrder = () => {
       options= {[
         {
           value: true,
-          label: "True"
+          label: "Giao hàng thành công"
         },
         {
           value: false,
-          label: "False"
+          label: "Chưa giao hàng"
         }
       ]}
       name = "isDelivered"

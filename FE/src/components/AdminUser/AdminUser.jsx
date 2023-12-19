@@ -34,14 +34,14 @@ const AdminUser = () => {
     const renderAction = () => {
         return (
             <div>
-                <DeleteOutlined
-                    style={{ color: 'red', fontSize: '24px', cursor: 'pointer' }}
+                <Button
+                    style={{color: 'white', cursor: 'pointer', backgroundColor:'#d9534f' }}
                     onClick={() => setIsModalOpenDelete(true)}
-                />
-                <EditOutlined
-                    style={{ color: 'orange', fontSize: '24px', cursor: 'pointer' }}
+                ><DeleteOutlined />Xóa</Button>
+                <Button
+                    style={{color: 'white',cursor: 'pointer', float:'right',backgroundColor: '#5bc0de'}}
                     onClick={handleDetailsProduct}
-                />
+                ><EditOutlined />Sửa</Button>
             </div>
         );
     };
@@ -224,7 +224,7 @@ const AdminUser = () => {
 
     const columns = [
         {
-            title: 'Name',
+            title: 'Tên',
             dataIndex: 'name',
             ellipsis: {
                 showTitle: false,
@@ -244,7 +244,7 @@ const AdminUser = () => {
             ...getColumnSearchProps('email'),
         },
         {
-            title: 'Address',
+            title: 'Địa chỉ',
             dataIndex: 'address',
             ellipsis: {
                 showTitle: false,
@@ -283,13 +283,13 @@ const AdminUser = () => {
             },
         },
         {
-            title: 'Phone',
+            title: 'Số điện thoại',
             dataIndex: 'phone',
             sorter: (a, b) => a.phone - b.phone,
             ...getColumnSearchProps('phone'),
         },
         {
-            title: 'Action',
+            title: 'Thao tác',
             dataIndex: 'action',
             render: renderAction,
         },
@@ -435,12 +435,12 @@ const AdminUser = () => {
                         form={form}
                     >
                         <Form.Item
-                            label="Name"
+                            label="Tên"
                             name="name"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your name!',
+                                    message: 'Vui lòng nhập tên!',
                                 },
                             ]}
                         >
@@ -457,7 +457,7 @@ const AdminUser = () => {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your email!',
+                                    message: 'Vui lòng nhập email!',
                                 },
                             ]}
                         >
@@ -469,12 +469,12 @@ const AdminUser = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Phone"
+                            label="Số điện thoại"
                             name="phone"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your phone!',
+                                    message: 'Vui lòng nhập số điện thoại!',
                                 },
                             ]}
                         >
@@ -486,12 +486,12 @@ const AdminUser = () => {
                         </Form.Item>
 
                         <Form.Item
-                            label="Address"
+                            label="Địa chỉ"
                             name="address"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your address!',
+                                    message: 'Vui lòng nhập địa chỉ!',
                                 },
                             ]}
                         >
@@ -508,12 +508,12 @@ const AdminUser = () => {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your image !',
+                                    message: 'Vui lòng nhập avatar!',
                                 },
                             ]}
                         >
                             <WrapperUploadFile onChange={handleOnChangeAvatarDetails} maxCount={1}>
-                                <Button>Select File</Button>
+                                <Button>Chọn File</Button>
                                 {stateUserDetails?.avatar && (
                                     <img
                                         src={stateUserDetails?.avatar}
@@ -537,7 +537,7 @@ const AdminUser = () => {
                             }}
                         >
                             <Button type="primary" htmlType="submit">
-                                Apply
+                                Xác nhận
                             </Button>
                         </Form.Item>
                     </Form>
