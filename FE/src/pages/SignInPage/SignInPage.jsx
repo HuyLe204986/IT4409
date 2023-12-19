@@ -89,7 +89,7 @@ const SignInPage = () => {
             <div style={{ display: 'flex', width: '800px', height: '445px', borderRadius: '6px', background: '#fff' }}>
                 <WrapperContainerLeft>
                     <h1>WELCOME TO MY SHOP </h1>
-                    <p>Vui lòng <span style={{color:'green'}}>Đ𝐚̆𝐧𝐠 𝐍𝐡𝐚̣̂𝐩</span> hoặc <span style={{color:'green'}}>𝐓𝐚̣𝐨 𝐓𝐚̀𝐢 𝐊𝐡𝐨𝐚̉𝐧</span> </p>
+                    <p>Vui lòng <span style={{color:'rgb(13, 92, 182)'}}>Đăng nhập</span> hoặc <span style={{color:'rgb(13, 92, 182)'}}>Tạo tài khoản</span> </p>
                     <InputForm 
                         style={{marginBottom: '10px'}} 
                         placeholder="abc@gmail.com" 
@@ -115,7 +115,7 @@ const SignInPage = () => {
                         }
                         </span>
                         <InputForm
-                            placeholder="123456"
+                            placeholder="password"
                             type={isShowPassword ? "text" : "password"}
                             value={password}
                             onChange={handleOnchangePassword}
@@ -128,7 +128,7 @@ const SignInPage = () => {
                             onClick={handleSignIn}
                             size={40}
                             styleButton={{
-                                background: 'rgb(51, 51, 51)',
+                                background: 'rgb(255, 57, 69)',
                                 height: '48px',
                                 width: '100%',
                                 border: 'none',
@@ -136,7 +136,7 @@ const SignInPage = () => {
                                 margin: '26px 0 10px',
                             }}
                             textButton={'Đăng nhập'}
-                            styleTextButton={{ color: '#d9d9d9', fontSize: '15px', fontWeight: '700' }}
+                            styleTextButton={{ color: '#fff', fontSize: '15px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </Loading>
                     {/* <p><WrapperTextLight>Quên mật khẩu?</WrapperTextLight></p> */}

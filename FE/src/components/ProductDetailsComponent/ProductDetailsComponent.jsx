@@ -1,7 +1,6 @@
 import { Row, Col, Image, Rate, Button, Empty, Flex } from 'antd';
 import React, { useEffect } from 'react';
 import {  PlusOutlined, MinusOutlined, GiftOutlined } from '@ant-design/icons';
-import imageProductSmall from '../../assets/images/product-img-small.webp';
 import {
     WrapperAddressProduct,
     WrapperGiftContent,
@@ -12,9 +11,7 @@ import {
     WrapperPriceProduct,
     WrapperPriceTextProduct,
     WrapperQuanlityProduct,
-    WrapperStyleColImage,
     WrapperStyleDescProduct,
-    WrapperStyleImageSmall,
     WrapperStyleNameProduct,
     WrapperStyleTextSell,
 } from './style';
@@ -70,9 +67,6 @@ const ProductDetailsComponent = ({ idProduct }) => {
         }
     }
 
-    // useEffect(() => {
-    //     initFacebookSDK()
-    // }, [])
 
     useEffect(() => {
         const orderRedux = order?.orderItems?.find((item) => item.product === productDetails?._id) 

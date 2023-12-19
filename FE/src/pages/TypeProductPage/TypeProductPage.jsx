@@ -14,12 +14,12 @@ const TypeProductPage = () => {
     const searchDebounce = useDebounce(searchProduct, 500);
     const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState([]);
-    const [panigate, setPanigate] = useState({
+    const [paginate, setPaginate] = useState({
         page: 0,
         limit: 10,
         total: 1,
     });
-
+    const [isFilter, setIsfilter] = useState(false);
     const [sort, setSort] = useState('');
     const [star, setStar] = useState(null);
     const [price, setPrice] = useState(null);
@@ -29,27 +29,28 @@ const TypeProductPage = () => {
     const fetchProductType = async (type, page, limit) => {
         setLoading(true);
         const res = await productService.getProductType(type, page, limit);
+        console.log('res', res);
         if (res?.status === 'OK') {
             setLoading(false);
             setProducts(res?.data);
             setOriginalProducts(res?.data); // lưu lại bản sao products
-            setPanigate({ ...panigate, total: res?.totalPage });
+            setPaginate({ ...paginate, total: res?.total});
         } else {
             setLoading(false);
         }
     };
     useEffect(() => {
         if (state) {
-            fetchProductType(state, panigate.page, panigate.limit);
+            fetchProductType(state, paginate.page, paginate.limit);
         }
-    }, [state, panigate.page, panigate.limit]);
+    }, [state, paginate.page, paginate.limit]);
     const onChange = (current, pageSize) => {
-        setPanigate({ ...panigate, page: current - 1, limit: pageSize });
+        setPaginate({ ...paginate, page: current - 1, limit: pageSize });
     };
 
     const filterProducts = (sortCriteria, starCriteria, priceCriteria) => {
+        console.log('filter', originalProducts);
         let filteredProducts = [...originalProducts];
-
         if (sortCriteria === 'asc') {
             filteredProducts.sort((a, b) => a.price - b.price);
         } else if (sortCriteria === 'desc') {
@@ -58,6 +59,7 @@ const TypeProductPage = () => {
 
         if (starCriteria) {
             filteredProducts = filteredProducts.filter((product) => product.rating >= Number(starCriteria));
+            // console.log('fitler start', filteredProducts);
         }
 
         if (priceCriteria) {
@@ -78,8 +80,8 @@ const TypeProductPage = () => {
                     break;
             }
         }
-
         setProducts(filteredProducts);
+        setIsfilter(true);
     };
 
     const handleOnChangeSort = (itemSelected) => {
@@ -98,13 +100,16 @@ const TypeProductPage = () => {
     };
 
     const handleRemoveOption = (isRemoveOption) =>  {
-        if (isRemoveOption) setProducts(originalProducts)
+        if (isRemoveOption) {
+            setProducts(originalProducts)
+            setIsfilter(false)
+        }
     }
 
     return (
         <Loading isLoading={loading}>
-            <div style={{ width: '100%', background: '#efefef' }}>
-                <div style={{ width: '1270px', margin: '0 auto' }}>
+            <div style={{ width: '100%', background: '#efefef', height: '100%' }}>
+                <div style={{ width: '1270px', margin: '0 auto', height: '100%' }}>
                     <Row style={{ flexWrap: 'nowrap', paddingTop: '10px', height: 'calc(100% - 20px)' }}>
                         <WrapperNavbar span={4}>
                             <NavbarComponent 
@@ -144,8 +149,8 @@ const TypeProductPage = () => {
                                 })}
                             </WrapperProducts>
                             <Pagination
-                                defaultCurrent={panigate?.page + 1}
-                                total={panigate?.total}
+                                defaultCurrent={paginate?.page + 1}
+                                total={isFilter ? products.length : paginate?.total}
                                 onChange={onChange}
                                 style={{ textAlign: 'center', margin: '10px 0' }}
                             />

@@ -17,7 +17,7 @@ export const WrapperContainerRight = styled.div`
     gap: 4px;
 `
 export const WrapperTextLight = styled.span`
-    color: green;
+    color: rgb(13, 92, 182);
     font-size: 13px;
     cursor: pointer;
 `
