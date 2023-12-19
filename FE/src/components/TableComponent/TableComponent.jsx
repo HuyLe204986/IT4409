@@ -1,7 +1,8 @@
-import { Table } from 'antd';
+import { Button, Table } from 'antd';
 import React, { useState } from 'react';
 import Loading from '../LoadingComponent/Loading';
 import { Excel } from 'antd-table-saveas-excel';
+import {FileExcelOutlined, DeleteOutlined}from '@ant-design/icons'
 import { useMemo } from 'react';
 
 const TableComponent = (props) => {
@@ -40,29 +41,27 @@ const TableComponent = (props) => {
     return (
         <div>
            <Loading isLoading={isLoading}>
-                {(rowSelectedKeys.length > 0 && handleDeleteMany) && (
-                    <div style={{
-                        background: '#1d1ddd',
-                        color: '#fff',
-                        fontWeight: 'bold',
-                        padding: '10px',
-                        cursor: 'pointer'
-                    }}
+           {(rowSelectedKeys.length > 0 && handleDeleteMany) && (
+                    <Button 
+                    style={{borderRadius: '6px', backgroundColor: '#d9534f', color: 'white'}}
                     onClick={handleDeleteAll}
                     >
-                        Xóa tất cả
-                    </div>
-                )}
-                <button onClick={exportExcel}>Export Excel</button>
-                <Table
-                    rowSelection={{
-                        type: selectionType,
-                        ...rowSelection,
-                    }}
-                    columns={columns}
-                    dataSource={dataSource}
-                    {...props}
-                />
+                    <DeleteOutlined />Xóa tất cả
+                    </Button>
+            )}
+            <Button 
+            style={{borderRadius: '6px', backgroundColor: '#1d6f42', color: 'white'}}
+            onClick={exportExcel}>
+            <FileExcelOutlined />Export Excel</Button>
+            <Table
+                rowSelection={{
+                    type: selectionType,
+                    ...rowSelection,
+                }}
+                columns={columns}
+                dataSource={dataSource}
+                {...props}
+            />
            </Loading>
         </div>
     );
