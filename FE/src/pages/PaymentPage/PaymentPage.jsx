@@ -1,7 +1,7 @@
 import {Form, Radio } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { Lable, WrapperInfo, WrapperLeft, WrapperRadio, WrapperRight, WrapperTotal } from './style';
-
+import {UserOutlined, PhoneOutlined, HomeOutlined } from '@ant-design/icons';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertPrice } from '../../utils';
@@ -264,36 +264,86 @@ const PaymentPage = () => {
               </WrapperInfo>
             </WrapperLeft>
             <WrapperRight>
-              <div style={{width: '100%'}}>
-                <WrapperInfo>
-                  <div>
-                    <span>Địa chỉ: </span>
-                    <span style={{fontWeight: 'bold'}}>{ `${user?.address} ${user?.city}`} </span>
-                    <span onClick={handleChangeAddress} style={{color: '#9255FD', cursor:'pointer'}}>Thay đổi</span>
-                  </div>
-                </WrapperInfo>
-                <WrapperInfo>
-                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                    <span>Tạm tính</span>
-                    <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(priceMemo)}</span>
-                  </div>
-                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                    <span>Giảm giá</span>
-                    <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(priceDiscountMemo)}</span>
-                  </div>
-                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                    <span>Phí giao hàng</span>
-                    <span style={{color: '#000', fontSize: '14px', fontWeight: 'bold'}}>{convertPrice(diliveryPriceMemo)}</span>
-                  </div>
-                </WrapperInfo>
-                <WrapperTotal>
-                  <span>Tổng tiền</span>
-                  <span style={{display:'flex', flexDirection: 'column'}}>
-                    <span style={{color: 'rgb(254, 56, 52)', fontSize: '24px', fontWeight: 'bold'}}>{convertPrice(totalPriceMemo)}</span>
-                    <span style={{color: '#000', fontSize: '11px'}}>(Đã bao gồm VAT nếu có)</span>
-                  </span>
-                </WrapperTotal>
-              </div>
+            <div style={{ width: '100%' }}>
+                            <WrapperInfo>
+                                <div style={{padding: '15px 0px'}}>
+                                    <span style={{fontWeight: 'bold', fontSize: '20px'}}>Thông tin khách hàng </span>
+                                </div>
+                                <div style={{padding: '5px 0px'}}>
+                                    <UserOutlined style={{paddingRight: '5px'}}/>
+                                    <span>Khách hàng: </span>
+                                    <span style={{ fontWeight: 'bold' }}>{`${user?.name}`} </span>
+                                </div>
+                                <div style={{padding: '5px 0px'}}>
+                                    <PhoneOutlined style={{paddingRight: '5px'}}/>
+                                    <span>Số điện thoại: </span>
+                                    <span style={{ fontWeight: 'bold' }}>{`${user?.phone}`} </span>
+                                </div>
+                                <div style={{padding: '5px 0px'}}>
+                                    <HomeOutlined style={{paddingRight: '5px'}}/>
+                                    <span>Địa chỉ: </span>
+                                    <span style={{ fontWeight: 'bold' }}>{`${user?.address} ${user?.city}`} </span>
+                                </div>
+                                <div style={{paddingTop: '10px'}}>
+                                    <span onClick={handleChangeAddress} style={{ color: '#9255FD', cursor: 'pointer', alignItems: 'right'}}>
+                                        Thay đổi
+                                    </span>
+                                </div>
+                            </WrapperInfo>
+                            <WrapperInfo>
+                                <div style={{padding: '15px 0px'}}>
+                                    <span style={{fontWeight: 'bold', fontSize: '20px'}}>Thông tin thanh toán </span>
+                                </div>
+                                <div
+                                    style={{
+                                        padding: '5px 0px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                    }}
+                                >
+                                    <span>Giá gốc</span>
+                                    <span style={{ color: '#000', fontSize: '14px', fontWeight: 'bold' }}>
+                                        {convertPrice(priceMemo)}
+                                    </span>
+                                </div>
+                                <div
+                                    style={{
+                                        padding: '5px 0px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                    }}
+                                >
+                                    <span>Giảm giá</span>
+                                    <span
+                                        style={{ color: '#000', fontSize: '14px', fontWeight: 'bold', margin: '6px 0' }}
+                                    >{convertPrice(priceDiscountMemo)}</span>
+                                </div>
+                                <div
+                                    style={{
+                                        padding: '5px 0px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                    }}
+                                >
+                                    <span>Phí giao hàng</span>
+                                    <span style={{ color: '#000', fontSize: '14px', fontWeight: 'bold' }}>
+                                        {convertPrice(diliveryPriceMemo)}
+                                    </span>
+                                </div>
+                            </WrapperInfo>
+                            <WrapperTotal>
+                                <span>Tổng tiền</span>
+                                <span style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <span style={{ color: 'rgb(254, 56, 52)', fontSize: '24px', fontWeight: 'bold' }}>
+                                        {convertPrice(totalPriceMemo)}
+                                    </span>
+                                    <span style={{ color: '#000', fontSize: '11px' }}>(Đã bao gồm VAT nếu có)</span>
+                                </span>
+                            </WrapperTotal>
+                        </div>
               {/* {console.log('paypal', payment)}
               {payment === 'paypal' && sdkReady ? (
   

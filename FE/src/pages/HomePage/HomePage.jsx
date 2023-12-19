@@ -5,6 +5,7 @@ import { WrapperButtonMore, WrapperProducts, WrapperTypeProduct,TextName } from 
 import slider1 from '../../assets/images/slider1.webp'
 import slider2 from '../../assets/images/slider2.webp'
 import slider3 from '../../assets/images/slider3.webp'
+import ad from '../../assets/images/ad.jpg'
 import CardComponent from '../../components/CardComponent/CardComponent'
 import { useSelector } from 'react-redux'
 import { useDebounce } from '../../hooks/useDebounce'
@@ -12,7 +13,7 @@ import * as productService from '../../services/ProductService';
 import { useQuery } from '@tanstack/react-query'
 import Loading from '../../components/LoadingComponent/Loading'
 import Footer from '../../components/FooterComponent/FooterComponent'
-import { Col, Row } from 'antd'
+import { Col, Row, Image } from 'antd'
 const HomePage = () => {
   const searchProduct = useSelector((state) => state?.product?.search)
     const searchDebounce = useDebounce(searchProduct, 500)
@@ -71,7 +72,8 @@ const HomePage = () => {
                             />
                         </Col>
                         <Col span={8}>      
-                            <div style={{flex: 1}}><h4>Tin tức</h4> </div>
+                            <div style={{flex: 1}}><Image height={274} src= {ad}/> </div>
+
                         </Col>
                     </Row>
                     <WrapperProducts>

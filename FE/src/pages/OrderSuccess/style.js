@@ -34,7 +34,7 @@ export const WrapperListOrder = styled.div`
 export const WrapperItemOrder = styled.div`
   display: flex;
   align-items: center;
-  padding: 9px 16px;
+  padding: auto;
   background: #fff;
   margin-top: 12px;
   justify-content: center
@@ -80,6 +80,7 @@ export const WrapperItemOrderInfo = styled.div`
   border-top-left-radius: 6px;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 `
 

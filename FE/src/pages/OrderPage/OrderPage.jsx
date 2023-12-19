@@ -12,7 +12,7 @@ import {
     WrapperStyleHeaderDilivery,
     WrapperTotal,
 } from './style';
-import { DeleteOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, MinusOutlined, PlusOutlined, UserOutlined, PhoneOutlined, HomeOutlined } from '@ant-design/icons';
 import { WrapperInputNumber } from '../../components/ProductDetailsComponent/style';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import { useDispatch, useSelector } from 'react-redux';
@@ -217,7 +217,7 @@ const OrderPage = () => {
     return (
         <div style={{ background: '#f5f5fa', with: '100%', height: '100vh' }}>
             <div style={{ height: '100%', width: '1270px', margin: '0 auto' }}>
-                <h3 style={{padding: '10px 0'}}>Giỏ hàng</h3>
+                <h1 style={{padding: '10px 0'}}>Giỏ hàng</h1>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <WrapperLeft>
                         <WrapperStyleHeaderDilivery>
@@ -346,17 +346,37 @@ const OrderPage = () => {
                     <WrapperRight>
                         <div style={{ width: '100%' }}>
                             <WrapperInfo>
-                                <div>
+                                <div style={{padding: '15px 0px'}}>
+                                    <span style={{fontWeight: 'bold', fontSize: '20px'}}>Thông tin khách hàng </span>
+                                </div>
+                                <div style={{padding: '5px 0px'}}>
+                                    <UserOutlined style={{paddingRight: '5px'}}/>
+                                    <span>Khách hàng: </span>
+                                    <span style={{ fontWeight: 'bold' }}>{`${user?.name}`} </span>
+                                </div>
+                                <div style={{padding: '5px 0px'}}>
+                                    <PhoneOutlined style={{paddingRight: '5px'}}/>
+                                    <span>Số điện thoại: </span>
+                                    <span style={{ fontWeight: 'bold' }}>{`${user?.phone}`} </span>
+                                </div>
+                                <div style={{padding: '5px 0px'}}>
+                                    <HomeOutlined style={{paddingRight: '5px'}}/>
                                     <span>Địa chỉ: </span>
                                     <span style={{ fontWeight: 'bold' }}>{`${user?.address} ${user?.city}`} </span>
-                                    <span onClick={handleChangeAddress} style={{ color: '#9255FD', cursor: 'pointer' }}>
+                                </div>
+                                <div style={{paddingTop: '10px'}}>
+                                    <span onClick={handleChangeAddress} style={{ color: '#9255FD', cursor: 'pointer', alignItems: 'right'}}>
                                         Thay đổi
                                     </span>
                                 </div>
                             </WrapperInfo>
                             <WrapperInfo>
+                                <div style={{padding: '15px 0px'}}>
+                                    <span style={{fontWeight: 'bold', fontSize: '20px'}}>Thông tin thanh toán </span>
+                                </div>
                                 <div
                                     style={{
+                                        padding: '5px 0px',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
@@ -369,6 +389,7 @@ const OrderPage = () => {
                                 </div>
                                 <div
                                     style={{
+                                        padding: '5px 0px',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
@@ -381,6 +402,7 @@ const OrderPage = () => {
                                 </div>
                                 <div
                                     style={{
+                                        padding: '5px 0px',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
