@@ -177,35 +177,9 @@ const ProductDetailsComponent = ({ idProduct }) => {
             <Row style={{ padding: '16px', background: '#fff', borderRadius: '4px', height:'560px', position: 'relative' }}>
                 <Col span={10} style={{ borderRight: '1px solid #e5e5e5', paddingRight: '8px' }}>
                     <Image 
-                        // src={productDetails?.image} 
-                        src="https://lapvip.vn/upload/products/thumb_630x0/dell-xps-13-plus-9320-gen-12th-1644402012.jpg"
+                        src={productDetails?.image} 
                         alt="image-product" 
                         preview={true} />
-                    <Row style={{ paddingTop: '10px', justifyContent: 'space-between' }}>
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image-product-small" preview={false} />
-                        </WrapperStyleColImage>
-
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image-product-small" preview={false} />
-                        </WrapperStyleColImage>
-
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image-product-small" preview={false} />
-                        </WrapperStyleColImage>
-
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image-product-small" preview={false} />
-                        </WrapperStyleColImage>
-
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image-product-small" preview={false} />
-                        </WrapperStyleColImage>
-
-                        <WrapperStyleColImage span={4}>
-                            <WrapperStyleImageSmall src={imageProductSmall} alt="image-product-small" preview={false} />
-                        </WrapperStyleColImage>
-                    </Row>
                 </Col>
                 <Col span={14} style={{ paddingLeft: '10px' }}>
                     <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>

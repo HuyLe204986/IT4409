@@ -68,7 +68,7 @@ const orderService = {
                     await OrderItem.create({
                         name: order.name,
                         amount: order.amount,
-                        image: 'a',
+                        image: order.image,
                         price: order.price,
                         discount: order.discount,
                         orderId: createdOrder.id,
