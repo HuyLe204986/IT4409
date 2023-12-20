@@ -84,7 +84,6 @@ const AdminOrder = () => {
 
   const queryOrder = useQuery({ queryKey: ['orders'], queryFn: getAllOrder })
   const { isPending: isLoadingOrders, data: orders } = queryOrder
-  console.log('que', queryOrder);
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div
@@ -250,7 +249,7 @@ const AdminOrder = () => {
         <PieChartComponent data={orders?.data} />
       </div> */}
       <div style={{ marginTop: '20px' }}>
-        <TableComponent  columns={columns} isLoading={isLoadingOrders} data={dataTable} 
+        <TableComponent  columns={columns} isLoading={!orders ? false : isLoadingOrders} data={dataTable} 
                     onRow={(record, rowIndex) => {
                         return {
                             onClick: (event) => {

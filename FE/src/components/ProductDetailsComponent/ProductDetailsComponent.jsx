@@ -283,15 +283,16 @@ const ProductDetailsComponent = ({ idProduct }) => {
             {comments?.data?.length === 0 ? (
                 <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
             ) : (
-                <>
+                <div style={{paddingBottom: '32px'}}>
                     <div style={{fontSize: '16px', fontWeight: 'bold', margin: '8px 0 24px 0'}}>Bình luận ({comments?.data?.length})</div>
                     {
                         comments?.data?.map((comment) => {
+                            console.log('comment', comment);
                             return (
                                 <CommentComponent 
                                     key={comment.id}
-                                    avatar="https://th.bing.com/th/id/OIP.hOiJYsPoj5A0ozax8YgrUgHaHa?w=204&h=204&c=7&r=0&o=5&dpr=1.4&pid=1.7"  
-                                    // avatar={comment.avatar} 
+                                    // avatar="https://th.bing.com/th/id/OIP.hOiJYsPoj5A0ozax8YgrUgHaHa?w=204&h=204&c=7&r=0&o=5&dpr=1.4&pid=1.7"  
+                                    avatar={comment.avata} 
                                     name={comment.name}
                                     email={comment.email} 
                                     content={comment.content}>
@@ -299,7 +300,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                             )
                         }) 
                     }
-                </>
+                </div>
                 
             )}
         </Loading>
