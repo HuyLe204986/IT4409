@@ -44,7 +44,7 @@ const OrderPage = () => {
         name: '',
         phone: '',
         address: '',
-        city: '',
+        // city: '',
     });
     const [form] = Form.useForm();
     const navigate = useNavigate();
@@ -99,7 +99,7 @@ const OrderPage = () => {
         if (isOpenModalUpdateInfo) {
             setStateUserDetails({
                 // ...stateUserDetails,
-                city: user?.city,
+                // city: user?.city,
                 name: user?.name,
                 address: user?.address,
                 phone: user?.phone,
@@ -126,9 +126,9 @@ const OrderPage = () => {
     }, [order]);
 
     const diliveryPriceMemo = useMemo(() => {
-        if (priceMemo >= 20000 && priceMemo < 500000) {
+        if (priceMemo >= 200000 && priceMemo < 5000000) {
             return 10000;
-        } else if (priceMemo >= 500000 || order?.orderItemsSlected?.length === 0) {
+        } else if (priceMemo >= 5000000 || order?.orderItemsSlected?.length === 0) {
             return 0;
         } else {
             return 20000;
@@ -148,7 +148,7 @@ const OrderPage = () => {
     const handleAddCard = () => {
         if (!order?.orderItemsSlected?.length) {
             message.error('Vui lòng chọn sản phẩm');
-        } else if (!user?.phone || !user.address || !user.name || !user.city) {
+        } else if (!user?.phone || !user.address || !user.name) {
             setIsOpenModalUpdateInfo(true);
         } else {
             navigate('/payment')
@@ -174,14 +174,14 @@ const OrderPage = () => {
     console.log('mutation update', mutationUpdate);
     console.log('dataa update', data);
     const handleUpdateInforUser = () => {
-        const { name, address, city, phone } = stateUserDetails;
-        if (name && address && city && phone) {
+        const { name, address, phone } = stateUserDetails;
+        if (name && address && phone) {
             mutationUpdate.mutate(
                 { id: user?.id, token: user?.access_token, ...stateUserDetails },
                 {
                     onSuccess: () => {
                         console.log('thanh cong cap nhat');
-                        dispatch(updateUser({ name, address, city, phone }));
+                        dispatch(updateUser({ name, address, phone }));
                         setIsOpenModalUpdateInfo(false);
                     },
                 },
@@ -362,7 +362,7 @@ const OrderPage = () => {
                                 <div style={{padding: '5px 0px'}}>
                                     <HomeOutlined style={{paddingRight: '5px'}}/>
                                     <span>Địa chỉ: </span>
-                                    <span style={{ fontWeight: 'bold' }}>{`${user?.address} ${user?.city}`} </span>
+                                    <span style={{ fontWeight: 'bold' }}>{`${user?.address}`} </span>
                                 </div>
                                 <div style={{paddingTop: '10px'}}>
                                     <span onClick={handleChangeAddress} style={{ color: '#9255FD', cursor: 'pointer', alignItems: 'right'}}>
@@ -468,7 +468,7 @@ const OrderPage = () => {
                                 name="name"
                             />
                         </Form.Item>
-                        <Form.Item
+                        {/* <Form.Item
                             label="TP"
                             name="city"
                             rules={[{ required: true, message: 'Vui lòng nhập thành phố!' }]}
@@ -478,7 +478,7 @@ const OrderPage = () => {
                                 onChange={handleOnchangeDetails}
                                 name="city"
                             />
-                        </Form.Item>
+                        </Form.Item> */}
                         <Form.Item
                             label="Điện thoại"
                             name="phone"

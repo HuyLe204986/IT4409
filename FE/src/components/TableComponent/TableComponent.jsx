@@ -23,6 +23,7 @@ const TableComponent = (props) => {
         // }),
     };
     const handleDeleteAll = () => {
+        console.log('key', rowSelectedKeys);
         handleDeleteMany(rowSelectedKeys)
         setRowSelectedKeys([]);
     }

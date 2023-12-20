@@ -129,7 +129,7 @@ const userService = {
             reject(error);
         }
     }),
-    deleteManyUser: (id) => new Promise(async (resolve, reject) => {
+    deleteManyUser: (ids) => new Promise(async (resolve, reject) => {
         try {
             await User.destroy({ where: { id: ids } });
             resolve({
