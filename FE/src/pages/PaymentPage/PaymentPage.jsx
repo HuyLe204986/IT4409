@@ -76,15 +76,25 @@ const PaymentPage = () => {
     return 0
   },[order])
 
+  // const diliveryPriceMemo = useMemo(() => {
+  //   if(priceMemo > 200000){
+  //     return 10000
+  //   }else if(priceMemo === 0 ){
+  //     return 0
+  //   }else {
+  //     return 20000
+  //   }
+  // },[priceMemo])
+
   const diliveryPriceMemo = useMemo(() => {
-    if(priceMemo > 200000){
-      return 10000
-    }else if(priceMemo === 0 ){
-      return 0
-    }else {
-      return 20000
+    if (priceMemo >= 200000 && priceMemo < 5000000) {
+        return 10000;
+    } else if (priceMemo >= 5000000 || order?.orderItemsSlected?.length === 0) {
+        return 0;
+    } else {
+        return 20000;
     }
-  },[priceMemo])
+}, [priceMemo]);
 
   const totalPriceMemo = useMemo(() => {
     return Number(priceMemo) - Number(priceDiscountMemo) + Number(diliveryPriceMemo)
@@ -114,8 +124,9 @@ const PaymentPage = () => {
   )
   console.log('mutation add order', mutationAddOrder);
   const handleAddOrder = () => {
+    console.log('dat hang');
     if(user?.access_token && order?.orderItemsSlected && user?.name
-      && user?.address && user?.phone && user?.city && priceMemo && user?.id) {
+      && user?.address && user?.phone && priceMemo && user?.id) {
         mutationAddOrder.mutate(
           { 
             token: user?.access_token, 

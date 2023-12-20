@@ -24,12 +24,12 @@ const userController = {
             } else if (!isCheckPassword) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'Password không đúng định dạng'
+                    message: 'Mật khẩu phải có ít nhất 6 ký tự bao gồm cả chữ và số'
                 })
             } else if (password !== confirmPassword) {
                 return res.status(200).json({
                     status: 'ERR',
-                    message: 'Password không giống confirmPassword'
+                    message: 'Xác thực mật khẩu không đúng'
                 })
             }
             const response = await userService.createUser(req.body);
@@ -167,7 +167,7 @@ const userController = {
     deleteMany: async (req, res) => {
         try {
             const ids = req.body.ids
-
+            // console.log('ids: ', req.body.ids);
             if (!ids) {
                 return res.status(200).json({
                     status: 'ERR',

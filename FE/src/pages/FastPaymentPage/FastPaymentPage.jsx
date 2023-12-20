@@ -38,14 +38,24 @@ const FastPaymentPage = () => {
   },[state])
 
   const diliveryPriceMemo = useMemo(() => {
-    if(priceMemo > 200000){
+    if(priceMemo > 2000000 && priceMemo < 5000000){
       return 10000
-    }else if(priceMemo === 0 ){
+    }else if( priceMemo >= 5000000 ||  orderItemsSlected?.length === 0 ){
       return 0
     }else {
       return 20000
     }
-  },[priceMemo])
+  },[state])
+
+//   const diliveryPriceMemo = useMemo(() => {
+//     if (priceMemo >= 20000 && priceMemo < 500000) {
+//         return 10000;
+//     } else if (priceMemo >= 500000 || order?.orderItemsSlected?.length === 0) {
+//         return 0;
+//     } else {
+//         return 20000;
+//     }
+// }, [priceMemo]);
 
   const totalPriceMemo = useMemo(() => {
     return Number(priceMemo) - Number(priceDiscountMemo) + Number(diliveryPriceMemo)
@@ -70,7 +80,7 @@ const FastPaymentPage = () => {
             fullName: user?.name,
             address:user?.address, 
             phone:user?.phone,
-            city: user?.city,
+            // city: user?.city,
             paymentMethod: payment,
             itemsPrice: priceMemo,
             shippingPrice: diliveryPriceMemo,
@@ -153,7 +163,7 @@ const FastPaymentPage = () => {
                         <div style={{padding: '5px 0px'}}>
                             <HomeOutlined style={{paddingRight: '5px'}}/>
                             <span>Địa chỉ: </span>
-                            <span style={{ fontWeight: 'bold' }}>{`${user?.address} ${user?.city}`} </span>
+                            <span style={{ fontWeight: 'bold' }}>{`${user?.address}`} </span>
                         </div>
                     </WrapperInfo>
                     <WrapperInfo>

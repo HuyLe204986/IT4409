@@ -92,7 +92,7 @@ const MyOrder = () => {
     return (
         <Loading isLoading={isLoading || isLoadingCancel}>
             <WrapperContainer>
-                <div style={{height: '100vh', width: '1270px', margin: '0 auto'}}>
+                <div style={{ width: '1270px', margin: '0 auto'}}>
                     <WrapperHeader style={{padding: '10px 0'}}>Đơn hàng của tôi</WrapperHeader>
                     <WrapperListOrder>
                         { Array.isArray(data) && data?.map((order) => {
