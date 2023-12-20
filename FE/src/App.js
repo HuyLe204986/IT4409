@@ -75,7 +75,7 @@ export function App() {
                             const Layout = route.isShowHeader ? DefaultComponent : Fragment;
                             //isCheckAuth &&
                             return <Route key={route.path} path={ route.path} element={
-                                <Layout>
+                                <Layout footer={route.isShowFooter}>
                                     <Page />
                                 </Layout>
                             } />;
